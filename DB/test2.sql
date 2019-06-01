@@ -50,14 +50,14 @@
 
 
 -- 6．查询选修数据库原理成绩第 2 名的学生姓名。 
-SELECT Sname
-FROM S,SC,C
-WHERE S.Sno = SC.Sno AND SC.Cno = C.Cno AND C.Cname = "数据库原理" AND SC.Grade = (
-     SELECT MAX(Grade)
-     FROM SC,C
-     WHERE SC.Cno = C.Cno AND C.Cname = "数据库原理" AND SC.Grade < MAX(Grade)
-     GROUP BY Cname
-);
+-- SELECT Sname
+-- FROM S,SC,C
+-- WHERE S.Sno = SC.Sno AND SC.Cno = C.Cno AND C.Cname = "数据库原理" AND SC.Grade = (
+--      SELECT MAX(Grade)
+--      FROM SC,C
+--      WHERE SC.Cno = C.Cno AND C.Cname = "数据库原理" AND SC.Grade < MAX(Grade)
+--      GROUP BY Cname
+-- );
 
 
 

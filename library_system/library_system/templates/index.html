@@ -13,8 +13,24 @@
         <input type="submit" value="提交" />
     </form>
 
+    <h1>用户展示</h1>
+        <table border="1">
+            <thead>
+                <tr>用户名</tr>
+                <tr>密码</tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item.user}}</td>
+                    <td>{{item.pwd}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
     <h1 style="background-color: antiquewhite;color:black">Hello World!</h1>
-    <script src="echarts.all.js"></script>
+    <script src="../static/js/node_modules/jquery/src/jquery.js"></script>
 </body>
 </html>
 

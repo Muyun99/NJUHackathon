@@ -29,30 +29,37 @@
 
 ```
 
-![修改html并跨域.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b74977324.png)
+![修改html并跨域.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b74977324.png)
 
-![结果.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b7496bc00.png)
+![结果.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b7496bc00.png)
 
 ## 2. 返回动态页面
 
 我们将每次用户输入的username和password都写到一个列表中，并进行返回.然后修改HTML代码进行展示
 
 
-![view新增代码.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b96864dd0.png)
+![view新增代码.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b96864dd0.png)
 
-![HTML新增代码.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b9686934f.png)
+![HTML新增代码.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b9686934f.png)
 
-![展示结果.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b96861670.png)
+![展示结果.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2b96861670.png)
 
 ## 3. 使用数据库
 
 我们先注册App，让数据库知道是为哪个App所建立的数据库，然后我们这里不使用自带的sqlite3,我们转用Mysql，所以我们将setting里的DATABATES做相应的改动，并且在创建的app下的migrations文件夹下的init.py中加入以下两行代码
-```
 
+```
 import pymysql
 pymysql.install_as_MySQLdb()
-
 ```
+
+然后在models中创建两个字段，在命令行中使用下面两条命令就可以自动创建
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+输入之后会在migrations目录生成一个0001_initial.py的迁移记录文件
+
 
 然后执行
 ```
@@ -60,8 +67,19 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-![注册app.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2bacf03b1b.png)
+![注册app.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2bacf03b1b.png)
 
-![修改数据库配置.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2bacef1cde.png)
+![修改数据库配置.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf402ef95cdf.png)
 
-![修改__init__文件.png](http://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/02/5cf2baceed7db.png)
+![修改__init__文件.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf402ef850c9.png)
+
+
+![在model里面创建两个字段.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf402ef8972c.png)
+
+![makemigrations.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf402ef7afbe.png)
+
+![migrate.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf402ef765ab.png)
+
+最后我们能够在数据库中看到结果就不用每次开启服务时都需要重新记录了。
+
+![数据库结果.png](https://muyun-blog-pic.oss-cn-shanghai.aliyuncs.com/2019/06/03/5cf404202fa59.png)

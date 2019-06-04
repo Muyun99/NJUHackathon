@@ -1,22 +1,44 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-
+from . import models
+from . import forms
 # Create your views here.
+
+
 def index(request):
     pass
-    return render(request,'login/index.html')
+    return render(request, 'login/index.html')
 
 
 def login(request):
-    pass
-    return render(request,'login/login.html')
+    if request.method == "POST":
+        login_form = forms.UserForm(request.POST)
+        message = "请检查填写的内容！"
+
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            if username.strip() and password:
+                # 确保用户名和密码都不为空
+                try:
+                    user = models.User.objects.get(name=username)
+                except:
+                    message = "用户不存在"
+                    return render(request, 'login/login.html', locals())
+                if user.password == password:
+                    return redirect('/login/index/')
+                else:
+                    message = "密码不正确"
+                    return render(request, 'login/login.html', locals())
+    login_form = forms.UserForm()
+    return render(request, 'login/login.html',locals())
 
 
 def register(request):
     pass
-    return render(request,'login/register.html')
+    return render(request, 'login/register.html')
 
 
 def logout(request):
     pass
-    return redirect("/login/index") #重定向?
+    return redirect("/login/index")  # 重定向?

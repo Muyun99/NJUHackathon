@@ -14,7 +14,7 @@ def index(request):
 
 def login(request):
     if request.session.get('is_login', None):
-        return redirect('/login/index/')
+        return redirect('/login/index')
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = "请检查填写的内容！"

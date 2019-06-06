@@ -27,6 +27,10 @@ class RegisterForm(forms.Form):
         ('male', "男"),
         ('female', "女"),
     )
+    roles = (
+        ('genneral_user', "普通用户"), 
+        ('admin', "管理员"),
+    )
     username = forms.CharField(
         label="用户名",
         max_length=128,
@@ -51,5 +55,7 @@ class RegisterForm(forms.Form):
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
         }))
+    
     sex = forms.ChoiceField(label="性别", choices=gender)
+    #role = forms.ChoiceField(label="角色", choices=roles)
     captcha = CaptchaField(label="验证码")

@@ -1,13 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>首页</title>
-  </head>
-  <body>
-    <h1>{{ request.session.username }}! 欢迎回来</h1>
-    <p>
-      <a href="/library/logout/">登出</a>
-    </p>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>首页</title>
+</head>
+
+<body>
+  <h1>{{ request.session.username }}! 欢迎回来</h1>
+
+  {% for book in book_list %}
+  <li>{{book.book_name}}</li>
+  {% endfor %}
+
+  <p>
+    <a href="/library/logout/">登出</a>
+  </p>
+</body>
+
 </html>

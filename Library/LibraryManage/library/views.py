@@ -7,9 +7,13 @@ from . import forms
 
 
 def index(request):
-    if not request.session.get('is_login', None):
-        return redirect('/library/login/')
-    return render(request, 'library/index.html')
+    # if not request.session.get('is_login', None):
+    #     return redirect('/library/login/')
+    if(request.method == "GET"):
+        book_list = models.Book.objects.all()
+        return render(request, 'library/index.html', {'data': book_list})
+    if(request.method == "POST"):
+        return render(request, 'library/index.html')
 
 
 def login(request):
@@ -70,6 +74,9 @@ def register(request):
                 new_user.password = password1
                 new_user.email = email
                 new_user.sex = sex
+                new_user.role = "general_user"
+                latest_user = models.User.objects.all()[0]
+                new_user.id_number = latest_user.id_number + 1
                 new_user.save()
                 message = "注册成功！"
 

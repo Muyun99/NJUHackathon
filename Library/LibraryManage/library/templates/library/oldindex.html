@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>首页</title>
+</head>
+
+<body>
+  <h1>{{ request.session.username }}! 欢迎回来</h1>
+
+  <table border="1">
+    <thead>
+      <th>书名</th>
+      <th>作者</th>
+      <th>ISBN号</th>
+      <th>出版商</th>
+      <th>馆藏数量</th>
+    </thead>
+    
+    <tbody>
+      {% for book in book_list %}
+      <tr>
+        <td  class="text-align:center;">{{book.book_name }}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.isbn}}</td>
+        <td>{{book.publisher}}</td>
+        <td>{{book.book_count}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+  <p>
+    <a href="/library/logout/">登出</a>
+  </p>
+</body>
+
+</html>

@@ -28,7 +28,7 @@ class RegisterForm(forms.Form):
         ('female', "女"),
     )
     roles = (
-        ('genneral_user', "普通用户"), 
+        ('genneral_user', "普通用户"),
         ('admin', "管理员"),
     )
     username = forms.CharField(
@@ -55,7 +55,13 @@ class RegisterForm(forms.Form):
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
         }))
-    
-    sex = forms.ChoiceField(label="性别", choices=gender)
-    #role = forms.ChoiceField(label="角色", choices=roles)
-    captcha = CaptchaField(label="验证码")
+
+    sex = forms.ChoiceField(
+        label="性别",
+        choices=gender,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        })
+        )
+    # role = forms.ChoiceField(label="角色", choices=roles)
+    # captcha = CaptchaField(label="验证码")

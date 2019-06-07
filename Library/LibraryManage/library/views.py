@@ -11,7 +11,7 @@ def index(request):
     #     return redirect('/library/login/')
     if(request.method == "GET"):
         book_list = models.Book.objects.all()
-        return render(request, 'library/index.html', {'data': book_list})
+        return render(request, 'library/index.html', {'book_list': book_list})
     if(request.method == "POST"):
         return render(request, 'library/index.html')
 

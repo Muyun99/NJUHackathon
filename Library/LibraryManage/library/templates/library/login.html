@@ -3,24 +3,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,shrink_to-fit=no">
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Nixon : Widget</title>
+
+    <!-- ================= Favicon ================== -->
+    <!-- Standard -->
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <!-- Retina iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <!-- Retina iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <!-- Standard iPad Touch Icon-->
+    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <!-- Standard iPhone Touch Icon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
     <link href="{% static 'library/css/login.css' %}" rel="stylesheet"/>
-    
-    <title>登录</title>
+    <link href="{% static 'library/fontAwesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/lib/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/lib/mmc-chat.css' %}" rel="stylesheet" />
+    <link href="{% static 'library/css/lib/sidebar.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/lib/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/lib/nixon.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/style.css' %}" rel="stylesheet">
+
 </head>
 
-<body>
+<body class="bg-primary">
 
-    <div class="container">
+    <div class="Nixon-login">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="index.html"><span>Foodmin</span></a>
+                        </div>
+                        <div class="login-form">
+                            <h4>Administratior Login</h4>
+                            <form action="/library/login/" method="POST">
+                                {% csrf_token %}
+                                {% if message %}
+                                <div class="alert alert-warning">{{message}}</div>
+                                {% endif %}
+                                <div class="form-group">
+                                    {{ login_form.username.label_tag }}
+                                    {{ login_form.username }}
+                                </div>
+                                <div class="form-group">
+                                    {{ login_form.password.label_tag }}
+                                    {{ login_form.password }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ login_form.captcha.label_tag }}
+                                    {{ login_form.captcha }}
+                                </div>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember Me
+                                    </label>
+                                    <label class="pull-right">
+                                        <a href="page-reset-password.html">Forgotten Password?</a>
+                                    </label>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+
+                                <div class="register-link m-t-15 text-center">
+                                    <p>Don't have account ? <a href="/library/register/"> Sign Up Here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container">
         <div class="col">
             <form class="form-login" action="/library/login/" method="POST">
                 {% csrf_token %}
                 {% if message %}
-                    <div class="alert alert-warning">{{message}}</div>
+                <div class="alert alert-warning">{{message}}</div>
                 {% endif %}
-                
+
                 <h3 class="text-center">
                     欢迎登录
                 </h3>
@@ -32,53 +102,24 @@
 
                 <div class="form-group">
                     {{ login_form.password.label_tag }}
-                    {{ login_form.password }}    
+                    {{ login_form.password }}
                 </div>
 
                 <div class="form-group">
                     {{ login_form.captcha.label_tag }}
                     {{ login_form.captcha }}
                 </div>
-                
-                <!-- <div class="form-group">
-                    <label for="id_username">用户名:</label>
-                    <input type="text" class="form-control" id="id_username" name="username" placeholder="用户名" autofocus
-                        required />
-                </div>
 
-                <div class="form-group">
-                    <label for="id_password">密码:</label>
-                    <input type="text" class="form-control" id="id_password" name="password" placeholder="密码" autofocus
-                        required />
-                </div> -->
                 <div>
                     <a href="/library/register/" class="text-success"><ins>新用户注册</ins></a>
                     <button type="submit" class="btn btn-primary float-right">登录</button>
                 </div>
             </form>
         </div>
-    </div>
-    <!-- <form action="/login/login/" , method="post">
-        <div>
-            <p>
-                <label for="id_username">用户名:</label>
-                <input type="text" id="id_username" name="username" placeholder="用户名" autofocus required />
-            </p>
-        </div>
-        <div>
-            <p>
-                <label for="id_password">密码:</label>
-                <input type="text" id="id_password" name="password" placeholder="密码" autofocus required />
-            </p>
-        </div>
-        <input type="submit" value="确定">
-    </form> -->
-
+    </div> -->
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.js"></script>
 </body>
 
 </html>
-
-

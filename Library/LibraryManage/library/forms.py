@@ -19,7 +19,7 @@ class UserForm(forms.Form):
             'placeholder': "Password"
         }))
     # captcha = CaptchaField(label="验证码", widget=forms.TextInput(attrs={'class':'form-control'}))
-    captcha = CaptchaField(label="验证码")
+    # captcha = CaptchaField(label="验证码")
 
 
 class RegisterForm(forms.Form):

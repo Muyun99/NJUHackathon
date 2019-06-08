@@ -11,4 +11,5 @@ urlpatterns = [
     path('usertable/', views.UserTable),
     path('booktable/', views.BookTable),
     path('borrowrecordtable/', views.BorrowRecordTable),
+    path('addbook/', views.AddBook),
 ]

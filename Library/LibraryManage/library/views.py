@@ -113,3 +113,8 @@ def BorrowRecordTable(request):
     if(request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
         return render(request, 'library/BorrowRecordTable.html',  locals())
+
+def AddBook(request):
+    if(request.method == "GET"):
+        book_list = models.Book.objects.all()
+        return render(request, 'library/addbook.html', locals())

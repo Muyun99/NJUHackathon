@@ -33,7 +33,7 @@ class Book(models.Model):
 
 
 class BorrowRecord(models.Model):
-    id_number = models.ForeignKey(User, on_delete=models.CASCADE)
-    isbn = models.ForeignKey(Book, on_delete=models.CASCADE)
+    id_number = models.ForeignKey(to='User', to_field='id_number', on_delete=models.CASCADE)
+    isbn = models.ForeignKey(to='Book', to_field='isbn', on_delete=models.CASCADE)
     borrow_time = models.DateTimeField(auto_now_add=True)
     limit_time = models.IntegerField()

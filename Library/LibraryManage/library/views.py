@@ -91,3 +91,18 @@ def register(request):
 def logout(request):
     pass
     return redirect("/library/index")  # 重定向?
+
+def UserTable(request):
+    if(request.method == "GET"):
+        user_list = models.User.objects.all()
+        return render(request, 'library/UserTable.html',  locals())
+
+def BookTable(request):
+    if(request.method == "GET"):
+        book_list = models.Book.objects.all()
+        return render(request, 'library/BookTable.html',  locals())
+
+def BorrowRecordTable(request):
+    if(request.method == "GET"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        return render(request, 'library/BorrowRecordTable.html',  locals())

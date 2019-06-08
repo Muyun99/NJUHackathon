@@ -30,6 +30,7 @@ class Book(models.Model):
     isbn = models.BigIntegerField(unique=True)
     publisher = models.CharField(max_length=128)
     book_count = models.IntegerField()
+    book_remark = models.CharField(max_length=1024)
 
 
 class BorrowRecord(models.Model):

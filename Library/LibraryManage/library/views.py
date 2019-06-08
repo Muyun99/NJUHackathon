@@ -7,8 +7,8 @@ from . import forms
 
 
 def index(request):
-    # if not request.session.get('is_login', None):
-    #     return redirect('/library/login/')
+    if not request.session.get('is_login', None):
+        return redirect('/library/login/')
     if(request.method == "GET"):
         book_list = models.Book.objects.all()
         return render(request, 'library/index.html', {'book_list': book_list})
@@ -18,7 +18,7 @@ def index(request):
 
 def login(request):
     if request.session.get('is_login', None):
-        return redirect('/library/index')
+        return redirect('/library/index/')
     if request.method == "POST":
         login_form = forms.UserForm(request.POST)
         message = "请检查填写的内容！"
@@ -34,6 +34,9 @@ def login(request):
                     message = "用户不存在"
                     return render(request, 'library/login.html', locals())
                 if user.password == password:
+                    request.session['is_login'] = True
+                    request.session['user_id'] = user.id
+                    request.session['user_name'] = user.name
                     return redirect('/library/index/')
                 else:
                     message = "密码不正确"
@@ -89,8 +92,12 @@ def register(request):
 
 
 def logout(request):
-    pass
-    return redirect("/library/index")  # 重定向?
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/library/login/")
+    request.session.flush()
+    return redirect("/library/login/")
+
 
 def UserTable(request):
     if(request.method == "GET"):

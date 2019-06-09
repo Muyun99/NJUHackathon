@@ -46,8 +46,9 @@ def login(request):
 
 
 def register(request):
-    if request.session.get('is_login', None):
-        return redirect('/library/index/')
+    if request.session.get('is_login', None): # 如果登录了就清楚session并跳转
+        request.session.flush()
+        return redirect('/library/register/')
     if request.method == "POST":
         register_form = forms.RegisterForm(request.POST)
         message = "请检查填写的内容！"
@@ -182,16 +183,16 @@ def BorrowRecordTable(request):
 def AddBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
-        return render(request, 'library/BorrowRecordTable.html', locals())
+        return render(request, 'library/addborrowrecord.html', locals())
 
 
 def DeleteBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
-        return render(request, 'library/BorrowRecordTable.html', locals())
+        return render(request, 'library/deleteborrowrecord.html', locals())
 
 
 def ChangeBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
-        return render(request, 'library/BorrowRecordTable.html', locals())
+        return render(request, 'library/changeborrowrecord.html', locals())

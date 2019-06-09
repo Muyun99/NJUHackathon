@@ -61,7 +61,106 @@ class RegisterForm(forms.Form):
         choices=gender,
         widget=forms.Select(attrs={
             'class': 'form-control',
-        })
-        )
+        }))
     # role = forms.ChoiceField(label="角色", choices=roles)
     # captcha = CaptchaField(label="验证码")
+
+
+class getBookForm(forms.Form):
+    author = forms.CharField(
+        label="作者",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "作者",
+            'autofocus': ''
+        }))
+
+    book_name = forms.CharField(
+        label="书名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.CharField(
+        label="ISBN号",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    publisher = forms.CharField(
+        label="出版社",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "出版社",
+        }))
+
+
+class addBookForm(forms.Form):
+    author = forms.CharField(
+        label="作者",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "作者",
+            'autofocus': ''
+        }))
+
+    book_name = forms.CharField(
+        label="书名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.IntegerField(
+        label="ISBN号",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    publisher = forms.CharField(
+        label="出版社",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "出版社",
+        }))
+
+    book_count = forms.IntegerField(
+        label="馆藏数量",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "馆藏数量",
+        }))
+
+    book_remark = forms.CharField(
+        label="书籍简介",
+        max_length=1024,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书籍简介",
+        }))
+
+
+class deleteBookForm(forms.Form):
+    pass
+
+
+class getBorrowRecordForm(forms.Form):
+    pass
+
+
+class addBorrowRecordForm(forms.Form):
+    pass
+
+
+class deleteBorrowRecordForm(forms.Form):
+    pass

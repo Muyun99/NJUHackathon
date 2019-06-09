@@ -9,10 +9,10 @@ from . import forms
 def index(request):
     if not request.session.get('is_login', None):
         return redirect('/library/login/')
-    if(request.method == "GET"):
+    if (request.method == "GET"):
         book_list = models.Book.objects.all()
         return render(request, 'library/index.html', {'book_list': book_list})
-    if(request.method == "POST"):
+    if (request.method == "POST"):
         return render(request, 'library/index.html')
 
 
@@ -100,21 +100,98 @@ def logout(request):
 
 
 def UserTable(request):
-    if(request.method == "GET"):
+    if (request.method == "GET"):
         user_list = models.User.objects.all()
-        return render(request, 'library/UserTable.html',  locals())
+        return render(request, 'library/UserTable.html', locals())
+
+
+def AddUser(request):
+    if (request.method == "GET"):
+        user_list = models.User.objects.all()
+        return render(request, 'library/adduser.html', locals())
+
+
+def DeleteUser(request):
+    if (request.method == "GET"):
+        user_list = models.User.objects.all()
+        return render(request, 'library/deleteuser.html', locals())
+
+
+def ChangeUser(request):
+    if (request.method == "GET"):
+        user_list = models.User.objects.all()
+        return render(request, 'library/changeuser.html', locals())
+
 
 def BookTable(request):
-    if(request.method == "GET"):
+    if (request.method == "GET"):
         book_list = models.Book.objects.all()
-        return render(request, 'library/BookTable.html',  locals())
+        return render(request, 'library/BookTable.html', locals())
 
-def BorrowRecordTable(request):
-    if(request.method == "GET"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
-        return render(request, 'library/BorrowRecordTable.html',  locals())
 
 def AddBook(request):
-    if(request.method == "GET"):
+    if (request.method == "GET"):
         book_list = models.Book.objects.all()
+        addbook_form = forms.addBookForm(request.POST)
         return render(request, 'library/addbook.html', locals())
+    # if request.session.get('is_login', None):
+    #     return redirect('/library/index/')
+    if (request.method == "POST"):
+        addbook_form = forms.addBookForm(request.POST)
+        if addbook_form.is_valid():
+            author = addbook_form.cleaned_data.get('author')
+            book_name = addbook_form.cleaned_data.get('book_name')
+            isbn = addbook_form.cleaned_data.get('isbn')
+            publisher = addbook_form.cleaned_data.get('publisher')
+            book_count = addbook_form.cleaned_data.get('book_count')
+            book_remark = addbook_form.cleaned_data.get('book_remark')
+
+            new_book = models.Book()
+            new_book.author = author
+            new_book.book_name = book_name
+            new_book.isbn = isbn
+            new_book.publisher = publisher
+            new_book.book_count = book_count
+            new_book.book_remark = book_remark
+            new_book.save()
+
+            return redirect('/library/addbook/')
+
+    addbook_form = forms.addBookForm()
+    return render(request, 'library/addbook.html', locals())
+
+
+def DeleteBook(request):
+    if (request.method == "GET"):
+        book_list = models.Book.objects.all()
+        return render(request, 'library/deletebook.html', locals())
+
+
+def ChangeBook(request):
+        if (request.method == "GET"):
+            book_list = models.Book.objects.all()
+        return render(request, 'library/changebook.html', locals())
+
+
+def BorrowRecordTable(request):
+    if (request.method == "GET"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        return render(request, 'library/BorrowRecordTable.html', locals())
+
+
+def AddBorrowRecord(request):
+    if (request.method == "GET"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        return render(request, 'library/BorrowRecordTable.html', locals())
+
+
+def DeleteBorrowRecord(request):
+    if (request.method == "GET"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        return render(request, 'library/BorrowRecordTable.html', locals())
+
+
+def ChangeBorrowRecord(request):
+    if (request.method == "GET"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        return render(request, 'library/BorrowRecordTable.html', locals())

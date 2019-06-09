@@ -64,7 +64,46 @@ class RegisterForm(forms.Form):
         }))
     # role = forms.ChoiceField(label="角色", choices=roles)
     # captcha = CaptchaField(label="验证码")
+class addUserForm(forms.Form):
+    gender = (
+        ('male', "男"),
+        ('female', "女"),
+    )
+    roles = (
+        ('genneral_user', "普通用户"),
+        ('admin', "管理员"),
+    )
+    username = forms.CharField(
+        label="用户名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    password = forms.CharField(
+        label="密码",
+        max_length=256,
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+        }))
+    email = forms.EmailField(
+        label="邮箱地址",
+        max_length=256,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+        }))
 
+    sex = forms.ChoiceField(
+        label="性别",
+        choices=gender,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
+    role = forms.ChoiceField(
+        label="注册身份",
+        choices=roles,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
 
 class getBookForm(forms.Form):
     author = forms.CharField(
@@ -160,6 +199,15 @@ class getBorrowRecordForm(forms.Form):
 
 class addBorrowRecordForm(forms.Form):
     pass
+    # id_number
+    # isbn = forms
+    # limit_time = forms.IntegerField() 
+    # class Meta:
+    
+    #     model = Author
+
+    #     fields = ('name', 'title')
+
 
 
 class deleteBorrowRecordForm(forms.Form):

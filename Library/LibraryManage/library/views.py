@@ -109,7 +109,43 @@ def UserTable(request):
 def AddUser(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
+        adduser_form = forms.addUserForm(request.POST)
         return render(request, 'library/adduser.html', locals())
+    if request.method == "POST":
+        adduser_form = forms.addUserForm(request.POST)
+        message = "请检查填写的内容！"
+        user_list = models.User.objects.all()
+        if adduser_form.is_valid():
+            username = adduser_form.cleaned_data.get('username')
+            password = adduser_form.cleaned_data.get('password')
+            email = adduser_form.cleaned_data.get('email')
+            sex = adduser_form.cleaned_data.get('sex')
+            role = adduser_form.cleaned_data.get('role')
+
+            same_name_user = models.User.objects.filter(name=username)
+            if same_name_user:
+                message = "用户名已存在"
+                return render(request, 'library/adduser.html', locals())
+
+            same_mail_user = models.User.objects.filter(email=email)
+            if same_mail_user:
+                message = "邮箱已存在"
+                return render(request, 'library/adduser.html', locals())
+
+            new_user = models.User()
+            new_user.name = username
+            new_user.password = password
+            new_user.email = email
+            new_user.sex = sex
+            new_user.role = role
+            latest_user = models.User.objects.all()[0]
+            new_user.id_number = latest_user.id_number + 1
+            new_user.save()
+            message = "注册成功！"
+
+            return redirect('/library/adduser/',locals())
+    adduser_form = forms.addUserForm()
+    return render(request, 'library/adduser.html', locals())
 
 
 def DeleteUser(request):

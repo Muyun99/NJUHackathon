@@ -243,9 +243,11 @@
                     <h4>添加书籍信息</h4>
                     <div class="booking-system-item">
                       <form action="/library/addbook/" , method="POST">
-                        {% if message%}
+                        {% if message %}
                         <div class="alert alert-warning">{{ message }}</div>
-                        {% endif %} {% csrf_token %}
+                        {% endif %} 
+                        {% csrf_token %}
+
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="form-group">

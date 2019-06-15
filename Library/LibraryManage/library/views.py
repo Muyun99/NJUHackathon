@@ -8,6 +8,7 @@ from . import forms
 
 def index(request):
     if not request.session.get('is_login', None):
+        request.session.flush()
         return redirect('/library/login/')
     if (request.method == "GET"):
         book_list = models.Book.objects.all()

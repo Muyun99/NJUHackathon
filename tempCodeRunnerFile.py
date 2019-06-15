@@ -1,13 +1,4 @@
-import requests
-import re
-import pymysql
-from bs4 import BeautifulSoup
-import random
-
-
-def getBookInfo():
-    index = 4148
-    conn = pymysql.connect(host='localhost',  # 本地数据库
+st',  # 本地数据库
                            user='root',  # 用户名
                            passwd='123456',  # 数据库密码
                            db='library',  # 数据库名

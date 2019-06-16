@@ -198,15 +198,30 @@ class getBorrowRecordForm(forms.Form):
 
 
 class addBorrowRecordForm(forms.Form):
-    pass
-    # id_number
-    # isbn = forms
-    # limit_time = forms.IntegerField() 
-    # class Meta:
     
-    #     model = Author
+    limit_time = forms.IntegerField(
+        label="借书截止时间",
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+            'placeholder': "借书截止时间",
+        }))
 
-    #     fields = ('name', 'title')
+    book_name = forms.CharField(
+        label="书名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.IntegerField(
+        label="ISBN号",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+    pass
+    
 
 
 

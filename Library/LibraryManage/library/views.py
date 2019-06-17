@@ -299,8 +299,46 @@ def ChangeBook(request):
 
 def BorrowRecordTable(request):
     if (request.method == "GET"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        borrowrecord_list = models.BorrowRecord.objects.all()
+        getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
         return render(request, 'library/BorrowRecordTable.html', locals())
+    if request.method == "POST":
+        getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
+        message = "请检查填写的内容！"
+        borrowrecord_list = models.BorrowRecord.objects.all()
+        if getborrowrecord_form.is_valid():
+            borrow_time = getborrowrecord_form.cleaned_data.get('borrow_time')
+            limit_time = getborrowrecord_form.cleaned_data.get('limit_time')
+            book_name = getborrowrecord_form.cleaned_data.get('book_name')
+            isbn = getborrowrecord_form.cleaned_data.get('isbn')
+        if borrow_time == None:
+            borrow_time=""
+        if limit_time == None:
+            limit_time=""
+        if book_name == None:
+            book_name=""
+        if publisher == None:
+            publisher=""
+        if isbn == None:
+            isbn=""
+
+        borrowrecord_list = models.Book.objects.all().filter(
+            Q(author__contains=author),
+            Q(book_name__contains=book_name),
+            Q(isbn__contains=isbn),
+            Q(publisher__contains=publisher),
+            Q(book_count__contains=book_count), 
+        )
+        if len(borrowrecord_list) != 0:
+            message = "查询成功！"
+        else:
+            message = "查询失败！请检查您填写的内容"
+        
+
+        return render(request, 'library/BorrowRecordTable.html', locals())
+        # return render('/library/usertable/', locals())
+    getbook_form = forms.getBookForm()
+    return render(request, 'library/BorrowRecordTable.html', locals())
 
 
 def AddBorrowRecord(request):

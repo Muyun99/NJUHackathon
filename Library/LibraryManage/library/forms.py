@@ -28,7 +28,7 @@ class RegisterForm(forms.Form):
         ('female', "女"),
     )
     roles = (
-        ('genneral_user', "普通用户"),
+        ('general_user', "普通用户"),
         ('admin', "管理员"),
     )
     username = forms.CharField(
@@ -72,7 +72,7 @@ class addUserForm(forms.Form):
         ('female', "女"),
     )
     roles = (
-        ('genneral_user', "普通用户"),
+        ('general_user', "普通用户"),
         ('admin', "管理员"),
     )
     username = forms.CharField(
@@ -124,7 +124,7 @@ class getUserForm(forms.Form):
     )
     roles = (
         (None, "无要求"),
-        ('genneral_user', "普通用户"),
+        ('general_user', "普通用户"),
         ('admin', "管理员"),
     )
     id_number = forms.IntegerField(
@@ -302,9 +302,9 @@ class updateBorrowRecordForm(forms.Form):
 
 class getBorrowRecordForm(forms.Form):
     borrow_time = forms.DateTimeField(
-        label="借书时间",
+        label="借书时间 格式为：2019-06-08 19:55:40",
         required=False,
-        widget=forms.DateTimeInput(attrs={
+        widget=forms.DateInput(attrs={
             'class': 'form-control',
             'placeholder': "借书时间",
         }))
@@ -331,4 +331,12 @@ class getBorrowRecordForm(forms.Form):
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': "ISBN号",
+        }))
+
+    id_number = forms.IntegerField(
+        label="会员卡号",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "会员卡号",
         }))

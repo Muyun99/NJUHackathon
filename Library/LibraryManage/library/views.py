@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.db.models import Q
+from datetime import datetime
 from . import models
 from . import forms
 
@@ -111,6 +112,7 @@ def UserTable(request):
         getuser_form = forms.getUserForm(request.POST)
         message = "请检查填写的内容！"
         user_list = models.User.objects.all()
+        
         if getuser_form.is_valid():
             id_number = getuser_form.cleaned_data.get('id_number')
             username = getuser_form.cleaned_data.get('username')
@@ -299,45 +301,54 @@ def ChangeBook(request):
 
 def BorrowRecordTable(request):
     if (request.method == "GET"):
-        borrowrecord_list = models.BorrowRecord.objects.all()
+        borrowRecord_list = models.BorrowRecord.objects.all()
         getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
         return render(request, 'library/BorrowRecordTable.html', locals())
     if request.method == "POST":
         getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
         message = "请检查填写的内容！"
-        borrowrecord_list = models.BorrowRecord.objects.all()
+        borrowRecord_list = models.BorrowRecord.objects.all()
         if getborrowrecord_form.is_valid():
             borrow_time = getborrowrecord_form.cleaned_data.get('borrow_time')
             limit_time = getborrowrecord_form.cleaned_data.get('limit_time')
             book_name = getborrowrecord_form.cleaned_data.get('book_name')
             isbn = getborrowrecord_form.cleaned_data.get('isbn')
+            id_number = getborrowrecord_form.cleaned_data.get('id_number')
         if borrow_time == None:
             borrow_time=""
         if limit_time == None:
-            limit_time=""
+            limit_time=0
         if book_name == None:
             book_name=""
-        if publisher == None:
-            publisher=""
         if isbn == None:
-            isbn=""
-
-        borrowrecord_list = models.Book.objects.all().filter(
-            Q(author__contains=author),
-            Q(book_name__contains=book_name),
-            Q(isbn__contains=isbn),
-            Q(publisher__contains=publisher),
-            Q(book_count__contains=book_count), 
+            isbn=0
+        if id_number == None:
+            id_number=0
+        borrowRecord_list = models.BorrowRecord.objects.all().filter(
+            # Q(id_number__gte=id_number),
+            # Q(borrow_time__gte=borrow_time), #大于等于时间输入的时间
+            # Q(limit_time__gte=limit_time),
+            # Q(book_name__contains=book_name),
+            Q(isbn__gte=isbn), 
+            
+            # Q(isbn=book_name), 
         )
-        if len(borrowrecord_list) != 0:
+        if len(borrowRecord_list) != 0:
             message = "查询成功！"
         else:
             message = "查询失败！请检查您填写的内容"
-        
+        datelist = []
+        nowdate = datetime.now()
+        index = 0
+        for i in borrowRecord_list:
+            # datelist[str(index)] = (nowdate - i.borrow_time).days
+            datelist.append((nowdate - i.borrow_time).days)
+            index += 1
 
+        print(datelist)
         return render(request, 'library/BorrowRecordTable.html', locals())
         # return render('/library/usertable/', locals())
-    getbook_form = forms.getBookForm()
+    getborrowrecord_form = forms.getBorrowRecordForm()
     return render(request, 'library/BorrowRecordTable.html', locals())
 
 

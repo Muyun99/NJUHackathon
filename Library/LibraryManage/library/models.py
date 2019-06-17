@@ -5,7 +5,7 @@ from django.db import models
 
 class User(models.Model):
     gender = (('male', "男"), ('female', "女"))
-    roles = (('genneral_user', "普通用户"), ('admin', "管理员"))
+    roles = (('general_user', "普通用户"), ('admin', "管理员"))
 
     name = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=256)

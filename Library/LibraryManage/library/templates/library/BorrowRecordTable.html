@@ -256,6 +256,26 @@
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getborrowrecord_form.id_number.label_tag }}
+                              {{ getborrowrecord_form.id_number }}
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getborrowrecord_form.book_name.label_tag }}
+                              {{ getborrowrecord_form.book_name }}
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getborrowrecord_form.isbn.label_tag }}
+                              {{ getborrowrecord_form.isbn }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
                               {{ getborrowrecord_form.borrow_time.label_tag }}
@@ -266,20 +286,6 @@
                             <div class="form-group">
                               {{ getborrowrecord_form.limit_time.label_tag }}
                               {{ getborrowrecord_form.limit_time }}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <div class="form-group">
-                              {{ getborrowrecord_form.isbn.label_tag }}
-                              {{ getborrowrecord_form.isbn }}
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <div class="form-group">
-                              {{ getborrowrecord_form.book_name.label_tag }}
-                              {{ getborrowrecord_form.book_name }}
                             </div>
                           </div>
                         </div>
@@ -339,7 +345,7 @@
           <!-- /# row -->
           <div class="main-content">
             <div class="row">
-              <div class="col-lg-10">
+              <div class="col-lg-12">
                 <div class="card alert">
                   <div class="card-header">
                     <h4>Table Basic</h4>
@@ -389,19 +395,28 @@
                           <th>序号</th>
                           <th>卡号</th>
                           <th>图书编号(ISBN号)</th>
+                          <th>图书名称</th>
                           <th>借书时间</th>
+                          <!-- <th>离还书还剩余天数</th> -->
+                          <th>已经借阅天数</th>
                           <th>借阅限制时间</th>
                         </tr>
                       </thead>
                       <tbody>
+                      
                         {% for borrowRecord in borrowRecord_list %}
+                        {% with i=forloop.counter0 %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
                           <td>{{ borrowRecord.id_number }}</td>
+                          <td>{{ borrowRecord.isbn.isbn }}</td>
                           <td>{{ borrowRecord.isbn.book_name }}</td>
                           <td>{{ borrowRecord.borrow_time }}</td>
+                          
+                          <td>{{ borrowRecord.borrow_time|timesince }}</td>
                           <td>{{ borrowRecord.limit_time }}</td>
                         </tr>
+                        {% endwith %}
                         {% endfor %}
                       </tbody>
                     </table>

@@ -118,12 +118,12 @@ class updateUserForm(forms.Form):
 
 class getUserForm(forms.Form):
     gender = (
-        (None,"无要求"),
+        (None, "无要求"),
         ('male', "男"),
         ('female', "女"),
     )
     roles = (
-        (None,"无要求"),
+        (None, "无要求"),
         ('genneral_user', "普通用户"),
         ('admin', "管理员"),
     )
@@ -161,7 +161,6 @@ class getUserForm(forms.Form):
         widget=forms.Select(attrs={
             'class': 'form-control',
         }))
-    
 
 
 class addBookForm(forms.Form):
@@ -224,6 +223,7 @@ class updateBookForm(forms.Form):
 class getBookForm(forms.Form):
     author = forms.CharField(
         label="作者",
+        required=False,
         max_length=128,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
@@ -233,6 +233,7 @@ class getBookForm(forms.Form):
 
     book_name = forms.CharField(
         label="书名",
+        required=False,
         max_length=128,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
@@ -241,6 +242,7 @@ class getBookForm(forms.Form):
 
     isbn = forms.CharField(
         label="ISBN号",
+        required=False,
         max_length=128,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
@@ -249,10 +251,19 @@ class getBookForm(forms.Form):
 
     publisher = forms.CharField(
         label="出版社",
+        required=False,
         max_length=128,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': "出版社",
+        }))
+        
+    book_count = forms.IntegerField(
+        label="馆藏数量",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "馆藏数量",
         }))
 
 

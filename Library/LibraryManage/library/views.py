@@ -212,7 +212,45 @@ def ChangeUser(request):
 def BookTable(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
+        getbook_form = forms.getBookForm(request.POST)
         return render(request, 'library/BookTable.html', locals())
+    if request.method == "POST":
+        getbook_form = forms.getBookForm(request.POST)
+        message = "请检查填写的内容！"
+        book_list = models.Book.objects.all()
+        if getbook_form.is_valid():
+            author = getbook_form.cleaned_data.get('author')
+            book_name = getbook_form.cleaned_data.get('book_name')
+            isbn = getbook_form.cleaned_data.get('isbn')
+            publisher = getbook_form.cleaned_data.get('publisher')
+            book_count = getbook_form.cleaned_data.get('book_count')
+        if author == None:
+            author=""
+        if book_name == None:
+            book_name=""
+        if isbn == None:
+            isbn=""
+        if publisher == None:
+            publisher=""
+        if book_count == None:
+            book_count=""
+        book_list = models.Book.objects.all().filter(
+            Q(author__contains=author),
+            Q(book_name__contains=book_name),
+            Q(isbn__contains=isbn),
+            Q(publisher__contains=publisher),
+            Q(book_count__contains=book_count), 
+        )
+        if len(book_list) != 0:
+            message = "查询成功！"
+        else:
+            message = "查询失败！请检查您填写的内容"
+        
+
+        return render(request, 'library/BookTable.html', locals())
+        # return render('/library/usertable/', locals())
+    getbook_form = forms.getBookForm()
+    return render(request, 'library/BookTable.html', locals())
 
 
 def AddBook(request):

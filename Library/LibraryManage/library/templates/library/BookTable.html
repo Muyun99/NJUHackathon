@@ -1,232 +1,448 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Nixon : Table</title>
 
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff" />
     <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="http://placehold.it/144.png/000/fff"
+    />
     <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="http://placehold.it/114.png/000/fff"
+    />
     <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="http://placehold.it/72.png/000/fff"
+    />
     <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="http://placehold.it/57.png/000/fff"
+    />
 
     <!-- Styles -->
-    <link href="{% static 'library/fontAwesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
-    <link href="{% static 'library/css/lib/themify-icons.css' %}" rel="stylesheet">
+    <link
+      href="{% static 'library/fontAwesome/css/fontawesome-all.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'library/css/lib/themify-icons.css' %}"
+      rel="stylesheet"
+    />
     <link href="{% static 'library/css/lib/mmc-chat.css' %}" rel="stylesheet" />
-    <link href="{% static 'library/css/lib/sidebar.css' %}" rel="stylesheet">
-    <link href="{% static 'library/css/lib/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'library/css/lib/nixon.css' %}" rel="stylesheet">
-    <link href="{% static 'library/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'library/css/lib/sidebar.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'library/css/lib/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'library/css/lib/nixon.css' %}" rel="stylesheet" />
+    <link href="{% static 'library/css/style.css' %}" rel="stylesheet" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-        <div class="nano">
-            <div class="nano-content">
-                <ul>
-                    <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> 控制台 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="index.html">Dashboard 1</a></li>
+      <div class="nano">
+        <div class="nano-content">
+          <ul>
+            <li class="active">
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-home"></i> 控制台
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="index.html">Dashboard 1</a></li>
+              </ul>
+            </li>
 
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-user"></i> 用户管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/adduser/">增加新的用户</a></li>
+                <li><a href="/library/deleteuser/">删除用户信息</a></li>
+                <li><a href="/library/changeuser/">修改用户信息</a></li>
+                <li><a href="/library/booktable/">查询用户信息</a></li>
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-user"></i> 用户管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/adduser/">增加新的用户</a></li>
-                            <li><a href="/library/deleteuser/">删除用户信息</a></li>
-                            <li><a href="/library/changeuser/">修改用户信息</a></li>
-                            <li><a href="/library/usertable/">查询用户信息</a></li>
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-layout-grid4-alt"></i> 书籍管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/addbook/">增加新的书籍</a></li>
+                <li><a href="/library/deletebook/">删除书籍信息</a></li>
+                <li><a href="/library/changebook/">修改书籍信息</a></li>
+                <li><a href="/library/booktable/">查询书籍信息</a></li>
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-layout-grid4-alt"></i> 书籍管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/addbook/">增加新的书籍</a></li>
-                            <li><a href="/library/deletebook/">删除书籍信息</a></li>
-                            <li><a href="/library/changebook/">修改书籍信息</a></li>
-                            <li><a href="/library/booktable/">查询书籍信息</a></li>
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-view-list-alt"></i> 借阅记录管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
+                <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
+                <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
+                <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
+              </ul>
+            </li>
 
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-target"></i> 相关页面
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/login/">登录</a></li>
+                <li><a href="/library/register/">注册</a></li>
+                <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i> 借阅记录管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
-                            <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
-                            <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
-                            <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a class="sidebar-sub-toggle"><i class="ti-target"></i> 相关页面 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/login/">登录</a></li>
-                            <li><a href="/library/register/">注册</a></li>
-                            <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
-                        </ul>
-                    </li>
-
-                    <li><a href="/library/logout/"><i class="ti-close"></i> 登出</a></li>
-                </ul>
-            </div>
+            <li>
+              <a href="/library/logout/"><i class="ti-close"></i> 登出</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
-
 
     <div class="header">
-        <div class="pull-left">
-            <div class="logo">
-                <a href="index.html">
-                    <img id="logoImg" src="{% static 'library/logo/logo.png' %}"
-                        data-logo_big="{% static 'library/logo/logo.png' %}"
-                        data-logo_small="{% static 'library/logo/logoSmall.png' %}" alt="Nixon" />
-                </a>
-            </div>
-            <div class="hamburger sidebar-toggle">
-                <span class="ti-menu"></span>
-            </div>
+      <div class="pull-left">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              id="logoImg"
+              src="{% static 'library/logo/logo.png' %}"
+              data-logo_big="{% static 'library/logo/logo.png' %}"
+              data-logo_small="{% static 'library/logo/logoSmall.png' %}"
+              alt="Nixon"
+            />
+          </a>
         </div>
+        <div class="hamburger sidebar-toggle">
+          <span class="ti-menu"></span>
+        </div>
+      </div>
 
-        <div class="pull-right p-r-15">
-            <ul>
-                <li class="header-icon dib"><img class="avatar-img" src="{% static 'library/image/avatar/1.jpg' %} "
-                        alt="" /> <span class="user-avatar">Jane <i class="ti-angle-down f-s-10"></i></span>
-                    <div class="drop-down dropdown-profile">
-                        <div class="dropdown-content-heading">
-                            <span class="text-left">Upgrade Now</span>
-                            <p class="trial-day">30 Days Trail</p>
-                        </div>
-                        <div class="dropdown-content-body">
-                            <ul>
-                                <li><a href="#"><i class="ti-user"></i> <span>Profile</span></a></li>
-                                <li><a href="#"><i class="ti-wallet"></i> <span>My Balance</span></a></li>
-                                <li><a href="#"><i class="ti-write"></i> <span>My Task</span></a></li>
-                                <li><a href="#"><i class="ti-calendar"></i> <span>My Calender</span></a></li>
-                                <li><a href="#"><i class="ti-email"></i> <span>Inbox</span></a></li>
-                                <li><a href="#"><i class="ti-settings"></i> <span>Setting</span></a></li>
-                                <li><a href="#"><i class="ti-help-alt"></i> <span>Help</span></a></li>
-                                <li><a href="#"><i class="ti-lock"></i> <span>Lock Screen</span></a></li>
-                                <li><a href="#"><i class="ti-power-off"></i> <span>Logout</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+      <div class="pull-right p-r-15">
+        <ul>
+          <li class="header-icon dib">
+            <img
+              class="avatar-img"
+              src="{% static 'library/image/avatar/1.jpg' %} "
+              alt=""
+            />
+            <span class="user-avatar"
+              >Jane <i class="ti-angle-down f-s-10"></i
+            ></span>
+            <div class="drop-down dropdown-profile">
+              <div class="dropdown-content-heading">
+                <span class="text-left">Upgrade Now</span>
+                <p class="trial-day">30 Days Trail</p>
+              </div>
+              <div class="dropdown-content-body">
+                <ul>
+                  <li>
+                    <a href="#"><i class="ti-user"></i> <span>Profile</span></a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-wallet"></i> <span>My Balance</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-write"></i> <span>My Task</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-calendar"></i> <span>My Calender</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"><i class="ti-email"></i> <span>Inbox</span></a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-settings"></i> <span>Setting</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-help-alt"></i> <span>Help</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-lock"></i> <span>Lock Screen</span></a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="ti-power-off"></i> <span>Logout</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
-
     <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-0">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>Dashboard 1</h1>
-                            </div>
-                        </div>
-                    </div><!-- /# column -->
-                    <div class="col-lg-4 p-0">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb text-right">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">Table</a></li>
-                                    <li class="active">Responsive Table</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div><!-- /# column -->
-                </div><!-- /# row -->
-                <div class="main-content">
-                    <div class="row">
-                        <div class="col-lg-10">
-                            <div class="card alert">
-                                <div class="card-header">
-                                    <h4>Table Basic </h4>
-                                    <div class="card-header-right-icon">
-                                        <ul>
-                                            <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>
-                                            <li class="card-option drop-menu"><i class="ti-settings"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                                                    role="link"></i>
-                                                <ul class="card-option-dropdown dropdown-menu">
-                                                    <li><a href="#"><i class="ti-loop"></i> Update data</a></li>
-                                                    <li><a href="#"><i class="ti-menu-alt"></i> Detail log</a></li>
-                                                    <li><a href="#"><i class="ti-pulse"></i> Statistics</a></li>
-                                                    <li><a href="#"><i class="ti-power-off"></i> Clear ist</a></li>
-                                                </ul>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <th>序号</th>
-                                                <th>书名</th>
-                                                <th>作者</th>
-                                                <th>ISBN号</th>
-                                                <th>出版商</th>
-                                                <th>馆藏数量</th>
-                                                <th>简介</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for book in book_list %}
-                                            <tr>
-                                                <td>{{forloop.counter}}</td>
-                                                <td>{{book.book_name }}</td>
-                                                <td>{{book.author}}</td>
-                                                <td>{{book.isbn}}</td>
-                                                <td>{{book.publisher}}</td>
-                                                <td>{{book.book_count}}</td>
-                                                <td>{{book.book_remark}}</td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div><!-- /# column -->
-                    </div><!-- /# row -->
+      <div class="main">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 p-0">
+              <div class="page-header">
+                <div class="page-title">
+                  <h1>查询条件面板</h1>
                 </div>
-            </div><!-- /# container-fluid -->
-        </div><!-- /# main -->
-    </div><!-- /# content wrap -->
+              </div>
+            </div>
+            <!-- /# column -->
+            <div class="col-lg-4 p-0">
+              <div class="page-header">
+                <div class="page-title">
+                  <ol class="breadcrumb text-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li class="active">Blank</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <!-- /# column -->
+          </div>
+          <!-- /# row -->
+          <div class="main-content">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card alert">
+                  <div class="card-header">
+                    <h4>查询书籍信息</h4>
+                    <div class="booking-system-item">
+                      <form
+                        action="/library/booktable/"
+                        ,
+                        method="POST"
+                        novalidate="novalidate"
+                      >
+                        {% if message %}
+                        <div class="alert alert-warning">{{ message }}</div>
+                        {% endif %} 
+                        {% csrf_token %}
+                        <div class="row">
 
-    <script src="{% static 'library/js/jquery.min.js' %}"></script><!-- jquery vendor -->
-    <script src="{% static 'library/js/jquery.nanoscroller.min.js' %}"></script><!-- nano scroller -->
-    <script src="{% static 'library/js/sidebar.js' %}"></script><!-- sidebar -->
-    <script src="{% static 'library/js/bootstrap.min.js' %}"></script><!-- bootstrap -->
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getbook_form.book_name.label_tag }}
+                              {{ getbook_form.book_name }}
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getbook_form.author.label_tag }}
+                              {{ getbook_form.author }}
+                            </div>
+                          </div>
+                          
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getbook_form.isbn.label_tag }}
+                              {{ getbook_form.isbn }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getbook_form.publisher.label_tag }}
+                              {{ getbook_form.publisher }}
+                            </div>
+                          </div>
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ getbook_form.book_count.label_tag }}
+                              {{ getbook_form.book_count }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="form-group">
+                              <button
+                                type="submit"
+                                class="btn btn-primary btn-rounded  m-l-5"
+                              >
+                                提交
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- /# card -->
+              </div>
+              <!-- /# column -->
+              <!-- /# column -->
+            </div>
+          </div>
+          <!-- /# container-fluid -->
+        </div>
+        <!-- /# main -->
+      </div>
+    </div>
+    <div class="content-wrap">
+      <div class="main">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 p-0">
+              <div class="page-header">
+                <div class="page-title">
+                  <h1>书籍查询结果</h1>
+                </div>
+              </div>
+            </div>
+            <!-- /# column -->
+            <div class="col-lg-4 p-0">
+              <div class="page-header">
+                <div class="page-title">
+                  <ol class="breadcrumb text-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Table</a></li>
+                    <li class="active">Responsive Table</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <!-- /# column -->
+          </div>
+          <!-- /# row -->
+          <div class="main-content">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card alert">
+                  <div class="card-header">
+                    <h4>Table Basic</h4>
+                    <div class="card-header-right-icon">
+                      <ul>
+                        <li class="card-close" data-dismiss="alert">
+                          <i class="ti-close"></i>
+                        </li>
+                        <li class="card-option drop-menu">
+                          <i
+                            class="ti-settings"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true"
+                            role="link"
+                          ></i>
+                          <ul class="card-option-dropdown dropdown-menu">
+                            <li>
+                              <a href="#"
+                                ><i class="ti-loop"></i> Update data</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#"
+                                ><i class="ti-menu-alt"></i> Detail log</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#"
+                                ><i class="ti-pulse"></i> Statistics</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#"
+                                ><i class="ti-power-off"></i> Clear ist</a
+                              >
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>书名</th>
+                          <th>作者</th>
+                          <th>ISBN号</th>
+                          <th>出版商</th>
+                          <th>馆藏数量</th>
+                          <th>简介</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for book in book_list %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ book.book_name }}</td>
+                          <td>{{ book.author }}</td>
+                          <td>{{ book.isbn }}</td>
+                          <td>{{ book.publisher }}</td>
+                          <td>{{ book.book_count }}</td>
+                          <td>{{ book.book_remark }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /# column -->
+            </div>
+            <!-- /# row -->
+          </div>
+        </div>
+        <!-- /# container-fluid -->
+      </div>
+      <!-- /# main -->
+    </div>
+    <!-- /# content wrap -->
+
+    <script src="{% static 'library/js/jquery.min.js' %}"></script
+    ><!-- jquery vendor -->
+    <script src="{% static 'library/js/jquery.nanoscroller.min.js' %}"></script
+    ><!-- nano scroller -->
+    <script src="{% static 'library/js/sidebar.js' %}"></script
+    ><!-- sidebar -->
+    <script src="{% static 'library/js/bootstrap.min.js' %}"></script
+    ><!-- bootstrap -->
     <script src="{% static 'library/js/mmc-common.js' %}"></script>
     <script src="{% static 'library/js/mmc-chat.js' %}"></script>
-    <script src="{% static 'library/js/scripts.js' %}"></script><!-- scripit init-->
-
-</body>
-
+    <script src="{% static 'library/js/scripts.js' %}"></script
+    ><!-- scripit init-->
+  </body>
 </html>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.db.models import Q
 from . import models
 from . import forms
 
@@ -47,7 +48,7 @@ def login(request):
 
 
 def register(request):
-    if request.session.get('is_login', None): # 如果登录了就清楚session并跳转
+    if request.session.get('is_login', None):  # 如果登录了就清楚session并跳转
         request.session.flush()
         return redirect('/library/register/')
     if request.method == "POST":
@@ -104,7 +105,54 @@ def logout(request):
 def UserTable(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
+        getuser_form = forms.getUserForm(request.POST)
         return render(request, 'library/UserTable.html', locals())
+    if request.method == "POST":
+        getuser_form = forms.getUserForm(request.POST)
+        message = "请检查填写的内容！"
+        user_list = models.User.objects.all()
+        if getuser_form.is_valid():
+            id_number = getuser_form.cleaned_data.get('id_number')
+            username = getuser_form.cleaned_data.get('username')
+            email = getuser_form.cleaned_data.get('email')
+            sex = getuser_form.cleaned_data.get('sex')
+            role = getuser_form.cleaned_data.get('role')
+        if id_number == None:
+            id_number=""
+        if username == None:
+            username=""
+        if email == None:
+            email=""
+        if sex == None:
+            sex=""
+        if role == None:
+            role=""
+        if sex == "":
+            user_list = models.User.objects.all().filter(
+                Q(id_number__contains=id_number),
+                Q(name__contains=username),
+                Q(email__contains=email),
+                Q(sex__contains=sex),
+                Q(role__contains=role),
+            )
+        else:
+            user_list = models.User.objects.all().filter(
+                Q(id_number__contains=id_number),
+                Q(name__contains=username),
+                Q(email__contains=email),
+                Q(sex=sex),
+                Q(role__contains=role),
+            )
+        if len(user_list) != 0:
+            message = "查询成功！"
+        else:
+            message = "查询失败！请检查您填写的内容"
+        # user_list = models.User.objects.all()
+
+        return render(request, 'library/UserTable.html', locals())
+        # return render('/library/usertable/', locals())
+    getuser_form = forms.getUserForm()
+    return render(request, 'library/UserTable.html', locals())
 
 
 def AddUser(request):
@@ -144,7 +192,7 @@ def AddUser(request):
             new_user.save()
             message = "注册成功！"
 
-            return redirect('/library/adduser/',locals())
+            return redirect('/library/adduser/', locals())
     adduser_form = forms.addUserForm()
     return render(request, 'library/adduser.html', locals())
 
@@ -206,9 +254,9 @@ def DeleteBook(request):
 
 
 def ChangeBook(request):
-        if (request.method == "GET"):
-            book_list = models.Book.objects.all()
-        return render(request, 'library/changebook.html', locals())
+    if (request.method == "GET"):
+        book_list = models.Book.objects.all()
+    return render(request, 'library/changebook.html', locals())
 
 
 def BorrowRecordTable(request):

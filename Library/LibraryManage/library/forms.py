@@ -64,6 +64,8 @@ class RegisterForm(forms.Form):
         }))
     # role = forms.ChoiceField(label="角色", choices=roles)
     # captcha = CaptchaField(label="验证码")
+
+
 class addUserForm(forms.Form):
     gender = (
         ('male', "男"),
@@ -105,39 +107,61 @@ class addUserForm(forms.Form):
             'class': 'form-control',
         }))
 
-class getBookForm(forms.Form):
-    author = forms.CharField(
-        label="作者",
-        max_length=128,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': "作者",
-            'autofocus': ''
-        }))
 
-    book_name = forms.CharField(
-        label="书名",
-        max_length=128,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': "书名",
-        }))
+class deleteUserForm(forms.Form):
+    pass
 
-    isbn = forms.CharField(
-        label="ISBN号",
-        max_length=128,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': "ISBN号",
-        }))
 
-    publisher = forms.CharField(
-        label="出版社",
+class updateUserForm(forms.Form):
+    pass
+
+
+class getUserForm(forms.Form):
+    gender = (
+        (None,"无要求"),
+        ('male', "男"),
+        ('female', "女"),
+    )
+    roles = (
+        (None,"无要求"),
+        ('genneral_user', "普通用户"),
+        ('admin', "管理员"),
+    )
+    id_number = forms.IntegerField(
+        label="会员卡号",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    username = forms.CharField(
+        label="用户名",
+        required=False,
         max_length=128,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "出版社",
         }))
+    email = forms.EmailField(
+        label="邮箱地址",
+        required=False,
+        max_length=256,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+        }))
+    sex = forms.ChoiceField(
+        label="性别",
+        required=False,
+        choices=gender,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
+    role = forms.ChoiceField(
+        label="注册身份",
+        required=False,
+        choices=roles,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
+    
 
 
 class addBookForm(forms.Form):
@@ -193,12 +217,47 @@ class deleteBookForm(forms.Form):
     pass
 
 
-class getBorrowRecordForm(forms.Form):
+class updateBookForm(forms.Form):
     pass
 
 
+class getBookForm(forms.Form):
+    author = forms.CharField(
+        label="作者",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "作者",
+            'autofocus': ''
+        }))
+
+    book_name = forms.CharField(
+        label="书名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.CharField(
+        label="ISBN号",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    publisher = forms.CharField(
+        label="出版社",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "出版社",
+        }))
+
+
 class addBorrowRecordForm(forms.Form):
-    
+
     limit_time = forms.IntegerField(
         label="借书截止时间",
         widget=forms.Select(attrs={
@@ -220,10 +279,15 @@ class addBorrowRecordForm(forms.Form):
             'class': 'form-control',
             'placeholder': "ISBN号",
         }))
-    pass
-    
-
 
 
 class deleteBorrowRecordForm(forms.Form):
+    pass
+
+
+class getBorrowRecordForm(forms.Form):
+    pass
+
+
+class updateBorrowRecordForm(forms.Form):
     pass

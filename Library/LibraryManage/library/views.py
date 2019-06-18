@@ -4,7 +4,7 @@ from django.db.models import Q
 from datetime import datetime
 from . import models
 from . import forms
-
+import pymysql
 # Create your views here.
 
 
@@ -112,7 +112,7 @@ def UserTable(request):
         getuser_form = forms.getUserForm(request.POST)
         message = "请检查填写的内容！"
         user_list = models.User.objects.all()
-        
+
         if getuser_form.is_valid():
             id_number = getuser_form.cleaned_data.get('id_number')
             username = getuser_form.cleaned_data.get('username')
@@ -120,15 +120,15 @@ def UserTable(request):
             sex = getuser_form.cleaned_data.get('sex')
             role = getuser_form.cleaned_data.get('role')
         if id_number == None:
-            id_number=""
+            id_number = ""
         if username == None:
-            username=""
+            username = ""
         if email == None:
-            email=""
+            email = ""
         if sex == None:
-            sex=""
+            sex = ""
         if role == None:
-            role=""
+            role = ""
         if sex == "":
             user_list = models.User.objects.all().filter(
                 Q(id_number__contains=id_number),
@@ -202,6 +202,37 @@ def AddUser(request):
 def DeleteUser(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
+        deleteuser_form = forms.deleteUserForm(request.POST)
+        return render(request, 'library/deleteuser.html', locals())
+    if request.method == "POST":
+        deleteuser_form = forms.deleteUserForm(request.POST)
+        message = "请检查填写的内容！"
+        user_list = models.User.objects.all()
+        if deleteuser_form.is_valid():
+            username = deleteuser_form.cleaned_data.get('username')
+            id_number = deleteuser_form.cleaned_data.get('id_number')
+            email = deleteuser_form.cleaned_data.get('email')
+            sex = deleteuser_form.cleaned_data.get('sex')
+            role = deleteuser_form.cleaned_data.get('role')
+            if len(username) * len(email) * len(sex) * role == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                # conn = pymysql.connect(host='localhost',  # 本地数据库
+                #            user='root',  # 用户名
+                #            passwd='123456',  # 数据库密码
+                #            db='library',  # 数据库名
+                #            charset='utf8')
+                # cursor = conn.cursor()
+                # sql = "DELETE FROM User WHERE id_number=%d,email = %s,name=%s, sex=%s,role=%s" % (id_number,email,username,sex,role)
+                # cursor.execute(sql)
+                # conn.commit()
+                # cursor.close()
+                # conn.close()
+                models.User.objects.get(
+                    id_number=id_number,
+                    name=username, email=email, sex=sex, role=role).delete()
+                message = "删除成功！"
+                user_list = models.User.objects.all()
         return render(request, 'library/deleteuser.html', locals())
 
 
@@ -227,27 +258,26 @@ def BookTable(request):
             publisher = getbook_form.cleaned_data.get('publisher')
             book_count = getbook_form.cleaned_data.get('book_count')
         if author == None:
-            author=""
+            author = ""
         if book_name == None:
-            book_name=""
+            book_name = ""
         if isbn == None:
-            isbn=""
+            isbn = ""
         if publisher == None:
-            publisher=""
+            publisher = ""
         if book_count == None:
-            book_count=""
+            book_count = ""
         book_list = models.Book.objects.all().filter(
             Q(author__contains=author),
             Q(book_name__contains=book_name),
             Q(isbn__contains=isbn),
             Q(publisher__contains=publisher),
-            Q(book_count__contains=book_count), 
+            Q(book_count__contains=book_count),
         )
         if len(book_list) != 0:
             message = "查询成功！"
         else:
             message = "查询失败！请检查您填写的内容"
-        
 
         return render(request, 'library/BookTable.html', locals())
         # return render('/library/usertable/', locals())
@@ -315,23 +345,23 @@ def BorrowRecordTable(request):
             isbn = getborrowrecord_form.cleaned_data.get('isbn')
             id_number = getborrowrecord_form.cleaned_data.get('id_number')
         if borrow_time == None:
-            borrow_time="2010-01-01"
+            borrow_time = "2010-01-01"
         if limit_time == None:
-            limit_time=0
+            limit_time = 0
         if book_name == None:
-            book_name=""
+            book_name = ""
         if isbn == None:
-            isbn=0
+            isbn = 0
         if id_number == None:
-            id_number=0
+            id_number = 0
         borrowRecord_list = models.BorrowRecord.objects.all().filter(
             Q(id_number__gte=id_number),
-            Q(borrow_time__gte=borrow_time), #大于等于时间输入的时间
+            Q(borrow_time__gte=borrow_time),  # 大于等于时间输入的时间
             Q(limit_time__gte=limit_time),
             # Q(book_name__contains=book_name),
-            Q(isbn__gte=isbn), 
-            
-            # Q(isbn=book_name), 
+            Q(isbn__gte=isbn),
+
+            # Q(isbn=book_name),
         )
         if len(borrowRecord_list) != 0:
             message = "查询成功！"
@@ -368,7 +398,8 @@ def AddBorrowRecord(request):
                 limit_time = 31
 
             new_borrowRecord = models.BorrowRecord()
-            new_borrowRecord.id_number = models.User.objects.get(id_number=id_number)
+            new_borrowRecord.id_number = models.User.objects.get(
+                id_number=id_number)
             new_borrowRecord.limit_time = limit_time
             new_borrowRecord.isbn = models.Book.objects.get(isbn=isbn)
             new_borrowRecord.save()
@@ -376,6 +407,7 @@ def AddBorrowRecord(request):
             return render(request, 'library/addborrowrecord.html', locals())
     addborrowRecord_form = forms.addBorrowRecordForm()
     return render(request, 'library/addborrowrecord.html', locals())
+
 
 def DeleteBorrowRecord(request):
     if (request.method == "GET"):

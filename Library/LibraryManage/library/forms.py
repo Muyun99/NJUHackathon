@@ -109,7 +109,45 @@ class addUserForm(forms.Form):
 
 
 class deleteUserForm(forms.Form):
-    pass
+    gender = (
+        ('male', "男"),
+        ('female', "女"),
+    )
+    roles = (
+        ('general_user', "普通用户"),
+        ('admin', "管理员"),
+    )
+    username = forms.CharField(
+        label="用户名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    id_number = forms.IntegerField(
+        label="会员卡号",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    email = forms.EmailField(
+        label="邮箱地址",
+        max_length=256,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+        }))
+
+    sex = forms.ChoiceField(
+        label="性别",
+        choices=gender,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
+    role = forms.ChoiceField(
+        label="注册身份",
+        choices=roles,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
 
 
 class updateUserForm(forms.Form):

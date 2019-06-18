@@ -1,445 +1,362 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Nixon : Blank</title>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff" />
-    <!-- Retina iPad Touch Icon-->
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      href="http://placehold.it/144.png/000/fff"
-    />
-    <!-- Retina iPhone Touch Icon-->
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="http://placehold.it/114.png/000/fff"
-    />
-    <!-- Standard iPad Touch Icon-->
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="http://placehold.it/72.png/000/fff"
-    />
-    <!-- Standard iPhone Touch Icon-->
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="http://placehold.it/57.png/000/fff"
-    />
+  <title>Nixon : Blank</title>
 
-    <!-- Styles -->
+  <!-- ================= Favicon ================== -->
+  <!-- Standard -->
+  <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff" />
+  <!-- Retina iPad Touch Icon-->
+  <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff" />
+  <!-- Retina iPhone Touch Icon-->
+  <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff" />
+  <!-- Standard iPad Touch Icon-->
+  <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff" />
+  <!-- Standard iPhone Touch Icon-->
+  <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff" />
 
-    <link
-      href="{% static 'library/fontAwesome/css/fontawesome-all.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'library/css/lib/themify-icons.css' %}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'library/css/lib/mmc-chat.css' %}" rel="stylesheet" />
-    <link
-      href="{% static 'library/css/lib/owl.carousel.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'library/css/lib/owl.theme.default.min.css' %}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'library/css/lib/sidebar.css' %}" rel="stylesheet" />
-    <link
-      href="{% static 'library/css/lib/bootstrap.min.css' %}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'library/css/lib/nixon.css' %}" rel="stylesheet" />
-    <link href="{% static 'library/css/style.css' %}" rel="stylesheet" />
-  </head>
+  <!-- Styles -->
 
-  <body>
-    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-      <div class="nano">
-        <div class="nano-content">
-          <ul>
-            <li class="active">
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-home"></i> 控制台
-                <span class="sidebar-collapse-icon ti-angle-down"></span
-              ></a>
-              <ul>
-                <li><a href="index.html">Dashboard 1</a></li>
-              </ul>
-            </li>
+  <link href="{% static 'library/fontAwesome/css/fontawesome-all.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/themify-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/mmc-chat.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/owl.carousel.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/owl.theme.default.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/sidebar.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/lib/nixon.css' %}" rel="stylesheet" />
+  <link href="{% static 'library/css/style.css' %}" rel="stylesheet" />
+</head>
 
-            <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-user"></i> 用户管理
-                <span class="sidebar-collapse-icon ti-angle-down"></span
-              ></a>
-              <ul>
-                <li><a href="/library/adduser/">增加新的用户</a></li>
-                <li><a href="/library/deleteuser/">删除用户信息</a></li>
-                <li><a href="/library/changeuser/">修改用户信息</a></li>
-                <li><a href="/library/usertable/">查询用户信息</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-layout-grid4-alt"></i> 书籍管理
-                <span class="sidebar-collapse-icon ti-angle-down"></span
-              ></a>
-              <ul>
-                <li><a href="/library/addbook/">增加新的书籍</a></li>
-                <li><a href="/library/deletebook/">删除书籍信息</a></li>
-                <li><a href="/library/changebook/">修改书籍信息</a></li>
-                <li><a href="/library/booktable/">查询书籍信息</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-view-list-alt"></i> 借阅记录管理
-                <span class="sidebar-collapse-icon ti-angle-down"></span
-              ></a>
-              <ul>
-                <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
-                <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
-                <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
-                <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
-              </ul>
-            </li>
-
-            <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-target"></i> 相关页面
-                <span class="sidebar-collapse-icon ti-angle-down"></span
-              ></a>
-              <ul>
-                <li><a href="/library/login/">登录</a></li>
-                <li><a href="/library/register/">注册</a></li>
-                <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
-              </ul>
-            </li>
-
-            <li>
-              <a href="/library/logout/"><i class="ti-close"></i> 登出</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- /# sidebar -->
-
-    <div class="header">
-      <div class="pull-left">
-        <div class="logo">
-          <a href="index.html">
-            <img
-              id="logoImg"
-              src="{% static 'library/logo/logo.png' %}"
-              data-logo_big="{% static 'library/logo/logo.png' %}"
-              data-logo_small="{% static 'library/logo/logoSmall.png' %}"
-              alt="Nixon"
-            />
-          </a>
-        </div>
-        <div class="hamburger sidebar-toggle">
-          <span class="ti-menu"></span>
-        </div>
-      </div>
-
-      <div class="pull-right p-r-15">
+<body>
+  <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+    <div class="nano">
+      <div class="nano-content">
         <ul>
-          <li class="header-icon dib">
-            <img
-              class="avatar-img"
-              src="{% static 'library/image/avatar/1.jpg' %} "
-              alt=""
-            />
-            <span class="user-avatar"
-              >Jane <i class="ti-angle-down f-s-10"></i
-            ></span>
-            <div class="drop-down dropdown-profile">
-              <div class="dropdown-content-heading">
-                <span class="text-left">Upgrade Now</span>
-                <p class="trial-day">30 Days Trail</p>
-              </div>
-              <div class="dropdown-content-body">
-                <ul>
-                  <li>
-                    <a href="#"><i class="ti-user"></i> <span>Profile</span></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-wallet"></i> <span>My Balance</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-write"></i> <span>My Task</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-calendar"></i> <span>My Calender</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"><i class="ti-email"></i> <span>Inbox</span></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-settings"></i> <span>Setting</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-help-alt"></i> <span>Help</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-lock"></i> <span>Lock Screen</span></a
-                    >
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="ti-power-off"></i> <span>Logout</span></a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <li class="active">
+            <a class="sidebar-sub-toggle"><i class="ti-home"></i> 控制台
+              <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+            <ul>
+              <li><a href="index.html">Dashboard 1</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="sidebar-sub-toggle"><i class="ti-user"></i> 用户管理
+              <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+            <ul>
+              <li><a href="/library/adduser/">增加新的用户</a></li>
+              <li><a href="/library/deleteuser/">删除用户信息</a></li>
+              <li><a href="/library/changeuser/">修改用户信息</a></li>
+              <li><a href="/library/usertable/">查询用户信息</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="sidebar-sub-toggle"><i class="ti-layout-grid4-alt"></i> 书籍管理
+              <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+            <ul>
+              <li><a href="/library/addbook/">增加新的书籍</a></li>
+              <li><a href="/library/deletebook/">删除书籍信息</a></li>
+              <li><a href="/library/changebook/">修改书籍信息</a></li>
+              <li><a href="/library/booktable/">查询书籍信息</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i> 借阅记录管理
+              <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+            <ul>
+              <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
+              <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
+              <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
+              <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="sidebar-sub-toggle"><i class="ti-target"></i> 相关页面
+              <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+            <ul>
+              <li><a href="/library/login/">登录</a></li>
+              <li><a href="/library/register/">注册</a></li>
+              <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
+            </ul>
+          </li>
+
+          <li>
+            <a href="/library/logout/"><i class="ti-close"></i> 登出</a>
           </li>
         </ul>
       </div>
     </div>
-    <!-- END chat Sidebar-->
+  </div>
+  <!-- /# sidebar -->
 
-    <div class="content-wrap">
-      <div class="main">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-8 p-0">
-              <div class="page-header">
-                <div class="page-title">
-                  <h1>Dashboard 1</h1>
-                </div>
-              </div>
-            </div>
-            <!-- /# column -->
-            <div class="col-lg-4 p-0">
-              <div class="page-header">
-                <div class="page-title">
-                  <ol class="breadcrumb text-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li class="active">Blank</li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-            <!-- /# column -->
-          </div>
-          <!-- /# row -->
-          <div class="main-content">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card alert">
-                  <div class="card-header">
-                    <h4>添加书籍信息</h4>
-                    <div class="booking-system-item">
-                      <form action="/library/addbook/" , method="POST">
-                        {% if message%}
-                        <div class="alert alert-warning">{{ message }}</div>
-                        {% endif %} {% csrf_token %}
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.author.label_tag }}
-                              {{ addbook_form.author }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_name.label_tag }}
-                              {{ addbook_form.book_name }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.isbn.label_tag }}
-                              {{ addbook_form.isbn }}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.publisher.label_tag }}
-                              {{ addbook_form.publisher }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_count.label_tag }}
-                              {{ addbook_form.book_count }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_remark.label_tag }}
-                              {{ addbook_form.book_remark }}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="form-group">
-                              <button
-                                type="submit"
-                                class="btn btn-primary btn-rounded  m-l-5"
-                              >
-                                提交
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- /# card -->
-              </div>
-              <!-- /# column -->
-              <!-- /# column -->
-            </div>
-          </div>
-          <!-- /# container-fluid -->
-        </div>
-        <!-- /# main -->
+  <div class="header">
+    <div class="pull-left">
+      <div class="logo">
+        <a href="index.html">
+          <img id="logoImg" src="{% static 'library/logo/logo.png' %}"
+            data-logo_big="{% static 'library/logo/logo.png' %}"
+            data-logo_small="{% static 'library/logo/logoSmall.png' %}" alt="Nixon" />
+        </a>
+      </div>
+      <div class="hamburger sidebar-toggle">
+        <span class="ti-menu"></span>
       </div>
     </div>
-    <!-- /# content wrap -->
 
-    <div class="content-wrap">
-      <div class="main">
-        <div class="container-fluid">
-          <div class="main-content">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card alert">
-                  <div class="card-header">
-                    <h4>当前用户信息</h4>
-                    <div class="card-header-right-icon">
-                      <ul>
-                        <li class="card-close" data-dismiss="alert">
-                          <i class="ti-close"></i>
-                        </li>
-                        <li class="card-option drop-menu">
-                          <i
-                            class="ti-settings"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="true"
-                            role="link"
-                          ></i>
-                          <ul class="card-option-dropdown dropdown-menu">
-                            <li>
-                              <a href="#"
-                                ><i class="ti-loop"></i> Update data</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ti-menu-alt"></i> Detail log</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ti-pulse"></i> Statistics</a
-                              >
-                            </li>
-                            <li>
-                              <a href="#"
-                                ><i class="ti-power-off"></i> Clear ist</a
-                              >
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <table class="table table-responsive">
-                      <thead>
-                        <tr>
-                          <th>序号</th>
-                          <th>卡号</th>
-                          <th>用户名</th>
-                          <th>邮箱</th>
-                          <th>性别</th>
-                          <th>角色</th>
-                          <th>注册时间</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for user in user_list reversed %}
-                        <tr>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ user.id_number }}</td>
-                          <td>{{ user.name }}</td>
-                          <td>{{ user.email }}</td>
-                          <td>{{ user.sex }}</td>
-                          <td>{{ user.role }}</td>
-                          <td>{{ user.c_time }}</td>
-                        </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
+    <div class="pull-right p-r-15">
+      <ul>
+        <li class="header-icon dib">
+          <img class="avatar-img" src="{% static 'library/image/avatar/1.jpg' %} " alt="" />
+          <span class="user-avatar">Jane <i class="ti-angle-down f-s-10"></i></span>
+          <div class="drop-down dropdown-profile">
+            <div class="dropdown-content-heading">
+              <span class="text-left">Upgrade Now</span>
+              <p class="trial-day">30 Days Trail</p>
+            </div>
+            <div class="dropdown-content-body">
+              <ul>
+                <li>
+                  <a href="#"><i class="ti-user"></i> <span>Profile</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-wallet"></i> <span>My Balance</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-write"></i> <span>My Task</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-calendar"></i> <span>My Calender</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-email"></i> <span>Inbox</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-settings"></i> <span>Setting</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-help-alt"></i> <span>Help</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-lock"></i> <span>Lock Screen</span></a>
+                </li>
+                <li>
+                  <a href="#"><i class="ti-power-off"></i> <span>Logout</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- END chat Sidebar-->
+
+  <div class="content-wrap">
+    <div class="main">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-8 p-0">
+            <div class="page-header">
+              <div class="page-title">
+                <h1>Dashboard 1</h1>
+              </div>
+            </div>
+          </div>
+          <!-- /# column -->
+          <div class="col-lg-4 p-0">
+            <div class="page-header">
+              <div class="page-title">
+                <ol class="breadcrumb text-right">
+                  <li><a href="#">Dashboard</a></li>
+                  <li class="active">Blank</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /# column -->
+        </div>
+        <!-- /# row -->
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card alert">
+                <div class="card-header">
+                  <h4>删除用户信息</h4>
+                  <div class="booking-system-item">
+                    <form action="/library/deleteuser/" , method="POST">
+                      {% if message %}
+                      <div class="alert alert-warning">{{ message }}</div>
+                      {% endif %}
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            {{ deleteuser_form.id_number.label_tag }}
+                            {{ deleteuser_form.id_number }}
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            {{ deleteuser_form.username.label_tag }}
+                            {{ deleteuser_form.username }}
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            {{ deleteuser_form.email.label_tag }}
+                            {{ deleteuser_form.email }}
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            {{ deleteuser_form.sex.label_tag }}
+                            {{ deleteuser_form.sex }}
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            {{ deleteuser_form.role.label_tag }}
+                            {{ deleteuser_form.role }}
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-rounded  m-l-5">
+                              提交
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <!-- /# column -->
+              <!-- /# card -->
             </div>
-            <!-- /# row -->
+            <!-- /# column -->
+            <!-- /# column -->
           </div>
         </div>
         <!-- /# container-fluid -->
       </div>
       <!-- /# main -->
     </div>
-    <!-- /# content wrap -->
+  </div>
+  <!-- /# content wrap -->
 
-    <!-- scripit init-->
-    <script src="{% static 'library/js/scripts.js' %}"></script>
-    <script src="{% static 'library/js/jquery.min.js' %}"></script
-    ><!-- jquery vendor -->
-    <script src="{% static 'library/js/jquery.nanoscroller.min.js' %}"></script
-    ><!-- nano scroller -->
-    <script src="{% static 'library/js/sidebar.js' %}"></script
-    ><!-- sidebar -->
-    <script src="{% static 'library/js/bootstrap.min.js' %}"></script
-    ><!-- bootstrap -->
-    <script src="{% static 'library/js/mmc-common.js' %}"></script>
-    <script src="{% static 'library/js/mmc-chat.js' %}"></script>
-    <script src="{% static 'library/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'library/js/owl.carousel-init.js' %}"></script>
-    <script src="{% static 'library/js/scripts.js' %}"></script>
-    <script src="{% static 'library/js/lib/calendar-2/moment.latest.min.js' %}"></script>
-    <script src="{% static 'library/js/lib/calendar-2/semantic.ui.min.js' %}"></script>
-    <script src="{% static 'library/js/lib/calendar-2/prism.min.js' %}"></script>
-    <script src="{% static 'library/js/lib/calendar-2/pignose.calendar.min.js' %}"></script>
-    <script src="{% static 'library/js/lib/calendar-2/pignose.init.js' %}"></script>
-    <!-- scripit init-->
-  </body>
+  <div class="content-wrap">
+    <div class="main">
+      <div class="container-fluid">
+        <div class="main-content">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card alert">
+                <div class="card-header">
+                  <h4>当前用户信息</h4>
+                  <div class="card-header-right-icon">
+                    <ul>
+                      <li class="card-close" data-dismiss="alert">
+                        <i class="ti-close"></i>
+                      </li>
+                      <li class="card-option drop-menu">
+                        <i class="ti-settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                          role="link"></i>
+                        <ul class="card-option-dropdown dropdown-menu">
+                          <li>
+                            <a href="#"><i class="ti-loop"></i> Update data</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="ti-menu-alt"></i> Detail log</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="ti-pulse"></i> Statistics</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="ti-power-off"></i> Clear ist</a>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <table class="table table-responsive">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>卡号</th>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <th>性别</th>
+                        <th>角色</th>
+                        <th>注册时间</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user in user_list reversed %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ user.id_number }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.sex }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.c_time }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /# column -->
+          </div>
+          <!-- /# row -->
+        </div>
+      </div>
+      <!-- /# container-fluid -->
+    </div>
+    <!-- /# main -->
+  </div>
+  <!-- /# content wrap -->
+
+  <!-- scripit init-->
+  <script src="{% static 'library/js/scripts.js' %}"></script>
+  <script src="{% static 'library/js/jquery.min.js' %}"></script><!-- jquery vendor -->
+  <script src="{% static 'library/js/jquery.nanoscroller.min.js' %}"></script><!-- nano scroller -->
+  <script src="{% static 'library/js/sidebar.js' %}"></script><!-- sidebar -->
+  <script src="{% static 'library/js/bootstrap.min.js' %}"></script><!-- bootstrap -->
+  <script src="{% static 'library/js/mmc-common.js' %}"></script>
+  <script src="{% static 'library/js/mmc-chat.js' %}"></script>
+  <script src="{% static 'library/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'library/js/owl.carousel-init.js' %}"></script>
+  <script src="{% static 'library/js/scripts.js' %}"></script>
+  <script src="{% static 'library/js/lib/calendar-2/moment.latest.min.js' %}"></script>
+  <script src="{% static 'library/js/lib/calendar-2/semantic.ui.min.js' %}"></script>
+  <script src="{% static 'library/js/lib/calendar-2/prism.min.js' %}"></script>
+  <script src="{% static 'library/js/lib/calendar-2/pignose.calendar.min.js' %}"></script>
+  <script src="{% static 'library/js/lib/calendar-2/pignose.init.js' %}"></script>
+  <!-- scripit init-->
+</body>
+
 </html>

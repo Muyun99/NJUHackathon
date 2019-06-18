@@ -10,7 +10,7 @@ urlpatterns = [
     path('logout/', views.logout),
     path('usertable/', views.UserTable),
     path('adduser/', views.AddUser),
-    path('deleteuser/', views.DeleteBook),
+    path('deleteuser/', views.DeleteUser),
     path('changeuser/', views.ChangeUser),
     path('booktable/', views.BookTable),
     path('addbook/', views.AddBook),

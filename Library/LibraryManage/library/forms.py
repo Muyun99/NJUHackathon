@@ -270,22 +270,23 @@ class getBookForm(forms.Form):
 class addBorrowRecordForm(forms.Form):
 
     limit_time = forms.IntegerField(
-        label="借书截止时间",
+        label="借书截止时间(默认31天)",
+        required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': "借书截止时间",
         }))
 
-    book_name = forms.CharField(
-        label="书名",
-        max_length=128,
+    id_number = forms.IntegerField(
+        label="会员卡号(必填)",
+        required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "书名",
+            'placeholder': "会员卡号",
         }))
 
     isbn = forms.IntegerField(
-        label="ISBN号",
+        label="ISBN号(必填)",
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': "ISBN号",
@@ -334,9 +335,9 @@ class getBorrowRecordForm(forms.Form):
         }))
 
     id_number = forms.IntegerField(
-        label="会员卡号",
+        label="会员卡号(必填)",
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': "会员卡号",
+            'placeholder': "会员卡号(必填)",
         }))

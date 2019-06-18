@@ -315,7 +315,7 @@ def BorrowRecordTable(request):
             isbn = getborrowrecord_form.cleaned_data.get('isbn')
             id_number = getborrowrecord_form.cleaned_data.get('id_number')
         if borrow_time == None:
-            borrow_time=""
+            borrow_time="2010-01-01"
         if limit_time == None:
             limit_time=0
         if book_name == None:
@@ -325,9 +325,9 @@ def BorrowRecordTable(request):
         if id_number == None:
             id_number=0
         borrowRecord_list = models.BorrowRecord.objects.all().filter(
-            # Q(id_number__gte=id_number),
-            # Q(borrow_time__gte=borrow_time), #大于等于时间输入的时间
-            # Q(limit_time__gte=limit_time),
+            Q(id_number__gte=id_number),
+            Q(borrow_time__gte=borrow_time), #大于等于时间输入的时间
+            Q(limit_time__gte=limit_time),
             # Q(book_name__contains=book_name),
             Q(isbn__gte=isbn), 
             
@@ -355,8 +355,27 @@ def BorrowRecordTable(request):
 def AddBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
+        addborrowRecord_form = forms.addBorrowRecordForm()
         return render(request, 'library/addborrowrecord.html', locals())
+    if (request.method == "POST"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        addborrowRecord_form = forms.addBorrowRecordForm(request.POST)
+        if addborrowRecord_form.is_valid():
+            id_number = addborrowRecord_form.cleaned_data.get('id_number')
+            isbn = addborrowRecord_form.cleaned_data.get('isbn')
+            limit_time = addborrowRecord_form.cleaned_data.get('limit_time')
+            if limit_time == None:
+                limit_time = 31
 
+            new_borrowRecord = models.BorrowRecord()
+            new_borrowRecord.id_number = models.User.objects.get(id_number=id_number)
+            new_borrowRecord.limit_time = limit_time
+            new_borrowRecord.isbn = models.Book.objects.get(isbn=isbn)
+            new_borrowRecord.save()
+
+            return render(request, 'library/addborrowrecord.html', locals())
+    addborrowRecord_form = forms.addBorrowRecordForm()
+    return render(request, 'library/addborrowrecord.html', locals())
 
 def DeleteBorrowRecord(request):
     if (request.method == "GET"):

@@ -257,50 +257,31 @@
                   <div class="card-header">
                     <h4>添加书籍信息</h4>
                     <div class="booking-system-item">
-                      <form action="/library/addbook/" , method="POST">
+                      <form action="/library/addborrowrecord/" , method="POST">
                         {% if message%}
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.author.label_tag }}
-                              {{ addbook_form.author }}
+                              {{ addborrowRecord_form.id_number.label_tag }}
+                              {{ addborrowRecord_form.id_number }}
                             </div>
                           </div>
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.book_name.label_tag }}
-                              {{ addbook_form.book_name }}
+                              {{ addborrowRecord_form.isbn.label_tag }}
+                              {{ addborrowRecord_form.isbn }}
                             </div>
                           </div>
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.isbn.label_tag }}
-                              {{ addbook_form.isbn }}
+                              {{ addborrowRecord_form.limit_time.label_tag }}
+                              {{ addborrowRecord_form.limit_time }}
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.publisher.label_tag }}
-                              {{ addbook_form.publisher }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_count.label_tag }}
-                              {{ addbook_form.book_count }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_remark.label_tag }}
-                              {{ addbook_form.book_remark }}
-                            </div>
-                          </div>
-                        </div>
+                       
 
                         <div class="row">
                           <div class="col-lg-12">
@@ -384,9 +365,12 @@
                       <thead>
                         <tr>
                           <th>序号</th>
-                          <th>卡号</th>
+                          <th>会员卡号</th>
+                          <th>会员姓名</th>
                           <th>图书编号(ISBN号)</th>
+                          <th>图书名称</th>
                           <th>借书时间</th>
+                          <th>已经借阅天数</th>
                           <th>借阅限制时间</th>
                         </tr>
                       </thead>
@@ -394,9 +378,12 @@
                         {% for borrowRecord in borrowRecord_list %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ borrowRecord.id_number }}</td>
+                          <td>{{ borrowRecord.id_number.id_number }}</td>
+                          <td>{{ borrowRecord.id_number.name }}</td>
+                          <td>{{ borrowRecord.isbn.isbn }}</td>
                           <td>{{ borrowRecord.isbn.book_name }}</td>
                           <td>{{ borrowRecord.borrow_time }}</td>
+                          <td>{{ borrowRecord.borrow_time|timesince }}</td>
                           <td>{{ borrowRecord.limit_time }}</td>
                         </tr>
                         {% endfor %}

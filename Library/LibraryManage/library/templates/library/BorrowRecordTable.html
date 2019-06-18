@@ -244,7 +244,7 @@
               <div class="col-lg-12">
                 <div class="card alert">
                   <div class="card-header">
-                    <h4>查询书籍信息</h4>
+                    <h4>查询书籍借阅记录</h4>
                     <div class="booking-system-item">
                       <form
                         action="/library/borrowrecordtable/"
@@ -256,19 +256,19 @@
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
-                          <div class="col-lg-4">
+                          <div class="col-lg-6">
                             <div class="form-group">
                               {{ getborrowrecord_form.id_number.label_tag }}
                               {{ getborrowrecord_form.id_number }}
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <!-- <div class="col-lg-4">
                             <div class="form-group">
                               {{ getborrowrecord_form.book_name.label_tag }}
                               {{ getborrowrecord_form.book_name }}
                             </div>
-                          </div>
-                          <div class="col-lg-4">
+                          </div> -->
+                          <div class="col-lg-6">
                             <div class="form-group">
                               {{ getborrowrecord_form.isbn.label_tag }}
                               {{ getborrowrecord_form.isbn }}
@@ -324,7 +324,7 @@
             <div class="col-lg-8 p-0">
               <div class="page-header">
                 <div class="page-title">
-                  <h1>Dashboard 1</h1>
+                  <h1>书籍借阅记录查询结果</h1>
                 </div>
               </div>
             </div>
@@ -393,7 +393,8 @@
                       <thead>
                         <tr>
                           <th>序号</th>
-                          <th>卡号</th>
+                          <th>会员卡号</th>
+                          <th>会员姓名</th>
                           <th>图书编号(ISBN号)</th>
                           <th>图书名称</th>
                           <th>借书时间</th>
@@ -408,7 +409,8 @@
                         {% with i=forloop.counter0 %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
-                          <td>{{ borrowRecord.id_number }}</td>
+                          <td>{{ borrowRecord.id_number.id_number }}</td>
+                          <td>{{ borrowRecord.id_number.name }}</td>
                           <td>{{ borrowRecord.isbn.isbn }}</td>
                           <td>{{ borrowRecord.isbn.book_name }}</td>
                           <td>{{ borrowRecord.borrow_time }}</td>

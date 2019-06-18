@@ -239,7 +239,32 @@ def DeleteUser(request):
 def ChangeUser(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
+        updateuser_form = forms.updateUserForm(request.POST)
         return render(request, 'library/changeuser.html', locals())
+    if (request.method == "POST"):
+        user_list = models.User.objects.all()
+        updateuser_form = forms.updateUserForm(request.POST)
+        if updateuser_form.is_valid():
+            username = updateuser_form.cleaned_data.get('username')
+            id_number = updateuser_form.cleaned_data.get('id_number')
+            email = updateuser_form.cleaned_data.get('email')
+            sex = updateuser_form.cleaned_data.get('sex')
+            role = updateuser_form.cleaned_data.get('role')
+            if len(username) * len(email) * len(sex) * role == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                models.User.objects.filter(id_number=id_number).update(
+                    name=username,
+                    email=email,
+                    sex=sex,
+                    role=role
+                )
+                message = "更新用户信息成功！"
+                user_list = models.User.objects.all()
+            return render(request, 'library/changeuser.html', locals())
+        else:
+            message = "请检查填写的内容！"
+            return render(request, 'library/changeuser.html', locals())
 
 
 def BookTable(request):

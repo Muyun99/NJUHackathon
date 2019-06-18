@@ -255,49 +255,46 @@
               <div class="col-lg-12">
                 <div class="card alert">
                   <div class="card-header">
-                    <h4>添加书籍信息</h4>
+                    <h4>通过会员卡号修改用户信息</h4>
                     <div class="booking-system-item">
-                      <form action="/library/addbook/" , method="POST">
+                      <form action="/library/changeuser/" , method="POST">
                         {% if message%}
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.author.label_tag }}
-                              {{ addbook_form.author }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_name.label_tag }}
-                              {{ addbook_form.book_name }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.isbn.label_tag }}
-                              {{ addbook_form.isbn }}
+                              {{ updateuser_form.id_number.label_tag }}
+                              {{ updateuser_form.id_number }}
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.publisher.label_tag }}
-                              {{ addbook_form.publisher }}
+                              {{ updateuser_form.username.label_tag }}
+                              {{ updateuser_form.username }}
+                            </div>
+                          </div>
+
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ updateuser_form.email.label_tag }}
+                              {{ updateuser_form.email }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="form-group">
+                              {{ updateuser_form.sex.label_tag }}
+                              {{ updateuser_form.sex }}
                             </div>
                           </div>
                           <div class="col-lg-4">
                             <div class="form-group">
-                              {{ addbook_form.book_count.label_tag }}
-                              {{ addbook_form.book_count }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_remark.label_tag }}
-                              {{ addbook_form.book_remark }}
+                              {{ updateuser_form.role.label_tag }}
+                              {{ updateuser_form.role }}
                             </div>
                           </div>
                         </div>

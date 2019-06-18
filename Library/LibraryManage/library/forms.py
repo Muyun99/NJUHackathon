@@ -151,7 +151,45 @@ class deleteUserForm(forms.Form):
 
 
 class updateUserForm(forms.Form):
-    pass
+    gender = (
+        ('male', "男"),
+        ('female', "女"),
+    )
+    roles = (
+        ('general_user', "普通用户"),
+        ('admin', "管理员"),
+    )
+    id_number = forms.IntegerField(
+        label="会员卡号(必填)",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    username = forms.CharField(
+        label="用户名",
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        }))
+    email = forms.EmailField(
+        label="邮箱地址",
+        max_length=256,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+        }))
+
+    sex = forms.ChoiceField(
+        label="性别",
+        choices=gender,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
+    role = forms.ChoiceField(
+        label="注册身份",
+        choices=roles,
+        widget=forms.Select(attrs={
+            'class': 'form-control',
+        }))
 
 
 class getUserForm(forms.Form):
@@ -290,7 +328,42 @@ class deleteBookForm(forms.Form):
 
 
 class updateBookForm(forms.Form):
-    pass
+    author = forms.CharField(
+        label="作者(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "作者",
+            'autofocus': ''
+        }))
+
+    book_name = forms.CharField(
+        label="书名(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.CharField(
+        label="ISBN号(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    publisher = forms.CharField(
+        label="出版社(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "出版社",
+        }))
 
 
 class getBookForm(forms.Form):

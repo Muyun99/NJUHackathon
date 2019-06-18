@@ -532,4 +532,26 @@ def DeleteBorrowRecord(request):
 def ChangeBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
+        updateborrowRecord_form = forms.updateBorrowRecordForm(request.POST)
         return render(request, 'library/changeborrowrecord.html', locals())
+
+    if (request.method == "POST"):
+        borrowRecord_list = models.BorrowRecord.objects.all()
+        updateborrowRecord_form = forms.updateBorrowRecordForm(request.POST)
+        if updateborrowRecord_form.is_valid():
+            isbn = updateborrowRecord_form.cleaned_data.get('isbn')
+            id_number = updateborrowRecord_form.cleaned_data.get('id_number')
+            limit_time = updateborrowRecord_form.cleaned_data.get('limit_time')
+            
+            if len(str(isbn)) * len(str(id_number)) * len(str(limit_time)) == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                models.BorrowRecord.objects.filter(isbn=isbn,id_number=id_number).update(
+                    limit_time=limit_time
+                )
+                message = "更新借阅记录成功！"
+                book_list = models.Book.objects.all()
+            return render(request, 'library/changeborrowrecord.html', locals())
+        else:
+            message = "请检查填写的内容！"
+            return render(request, 'library/changeborrowrecord.html', locals())

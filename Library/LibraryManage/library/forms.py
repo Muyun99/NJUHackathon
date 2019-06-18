@@ -473,7 +473,7 @@ class deleteBorrowRecordForm(forms.Form):
 
 
 class updateBorrowRecordForm(forms.Form):
-    imit_time = forms.IntegerField(
+    limit_time = forms.IntegerField(
         label="借书截止时间(默认31天)",
         required=False,
         widget=forms.TextInput(attrs={

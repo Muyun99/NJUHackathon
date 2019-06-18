@@ -365,6 +365,21 @@ class updateBookForm(forms.Form):
             'placeholder': "出版社",
         }))
 
+    book_count = forms.IntegerField(
+        label="馆藏数量(必填)",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "馆藏数量",
+        }))
+
+    book_remark = forms.CharField(
+        label="书籍简介(必填)",
+        max_length=1024,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书籍简介",
+        }))
+
 
 class getBookForm(forms.Form):
     author = forms.CharField(
@@ -458,7 +473,28 @@ class deleteBorrowRecordForm(forms.Form):
 
 
 class updateBorrowRecordForm(forms.Form):
-    pass
+    imit_time = forms.IntegerField(
+        label="借书截止时间(默认31天)",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "借书截止时间",
+        }))
+
+    id_number = forms.IntegerField(
+        label="会员卡号(必填)",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "会员卡号",
+        }))
+
+    isbn = forms.IntegerField(
+        label="ISBN号(必填)",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
 
 
 class getBorrowRecordForm(forms.Form):

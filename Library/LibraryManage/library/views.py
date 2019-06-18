@@ -383,7 +383,35 @@ def DeleteBook(request):
 def ChangeBook(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
-    return render(request, 'library/changebook.html', locals())
+        updatebook_form = forms.updateBookForm(request.POST)
+        return render(request, 'library/changebook.html', locals())
+
+    if (request.method == "POST"):
+        book_list = models.Book.objects.all()
+        updatebook_form = forms.updateBookForm(request.POST)
+        if updatebook_form.is_valid():
+            isbn = updatebook_form.cleaned_data.get('isbn')
+            book_name = updatebook_form.cleaned_data.get('book_name')
+            author = updatebook_form.cleaned_data.get('author')
+            publisher = updatebook_form.cleaned_data.get('publisher')
+            book_count = updatebook_form.cleaned_data.get('book_count')
+            book_remark = updatebook_form.cleaned_data.get('book_remark')
+            if len(isbn) * len(book_name) * len(author) * len(publisher) == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                models.Book.objects.filter(isbn=isbn).update(
+                    book_name=book_name,
+                    author=author,
+                    publisher=publisher,
+                    book_count=book_count,
+                    book_remark=book_remark,
+                )
+                message = "更新书籍信息成功！"
+                book_list = models.Book.objects.all()
+            return render(request, 'library/changebook.html', locals())
+        else:
+            message = "请检查填写的内容！"
+            return render(request, 'library/changebook.html', locals())
 
 
 def BorrowRecordTable(request):

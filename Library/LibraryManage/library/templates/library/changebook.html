@@ -240,52 +240,58 @@
               <div class="col-lg-12">
                 <div class="card alert">
                   <div class="card-header">
-                    <h4>添加书籍信息</h4>
+                    <h4>根据isbn码更新书籍信息</h4>
                     <div class="booking-system-item">
-                      <form action="/library/addbook/" , method="POST">
+                      <form action="/library/changebook/" , method="POST">
                         {% if message%}
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.author.label_tag }}
-                              {{ addbook_form.author }}
+                            <div class="col-lg-4">
+                              <div class="form-group">
+                                {{ updatebook_form.isbn.label_tag }}
+                                {{ updatebook_form.isbn }}
+                              </div>
                             </div>
                           </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_name.label_tag }}
-                              {{ addbook_form.book_name }}
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <div class="form-group">
+                                {{ updatebook_form.book_name.label_tag }}
+                                {{ updatebook_form.book_name }}
+                              </div>
+                            </div>
+  
+                            <div class="col-lg-4">
+                              <div class="form-group">
+                                {{ updatebook_form.author.label_tag }}
+                                {{ updatebook_form.author }}
+                              </div>
                             </div>
                           </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.isbn.label_tag }}
-                              {{ addbook_form.isbn }}
+                          <div class="row">
+                              <div class="col-lg-4">
+                                <div class="form-group">
+                                  {{ updatebook_form.publisher.label_tag }}
+                                  {{ updatebook_form.publisher }}
+                                </div>
+                              </div>
+                              <div class="col-lg-4">
+                                <div class="form-group">
+                                  {{ updatebook_form.book_count.label_tag }}
+                                  {{ updatebook_form.book_count }}
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.publisher.label_tag }}
-                              {{ addbook_form.publisher }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_count.label_tag }}
-                              {{ addbook_form.book_count }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_remark.label_tag }}
-                              {{ addbook_form.book_remark }}
-                            </div>
-                          </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="form-group">
+                                    {{ updatebook_form.book_remark.label_tag }}
+                                    {{ updatebook_form.book_remark }}
+                                  </div>
+                                </div>
+                              </div>
+                        
 
                         <div class="row">
                           <div class="col-lg-12">
@@ -375,7 +381,7 @@
                           <th>ISBN号</th>
                           <th>出版商</th>
                           <th>馆藏数量</th>
-                          <th>简介</th>
+                          <th>书籍简介</th>
                         </tr>
                       </thead>
                       <tbody>

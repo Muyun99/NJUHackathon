@@ -390,6 +390,8 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% load pagination_tags %} 
+                        {% autopaginate user_list 20 %}
                         {% for user in user_list reversed %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
@@ -403,6 +405,7 @@
                         {% endfor %}
                       </tbody>
                     </table>
+                    {% paginate %}
                   </div>
                 </div>
               </div>

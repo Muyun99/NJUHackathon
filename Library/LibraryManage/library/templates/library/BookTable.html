@@ -254,10 +254,8 @@
                       >
                         {% if message %}
                         <div class="alert alert-warning">{{ message }}</div>
-                        {% endif %} 
-                        {% csrf_token %}
+                        {% endif %} {% csrf_token %}
                         <div class="row">
-
                           <div class="col-lg-4">
                             <div class="form-group">
                               {{ getbook_form.book_name.label_tag }}
@@ -270,7 +268,7 @@
                               {{ getbook_form.author }}
                             </div>
                           </div>
-                          
+
                           <div class="col-lg-4">
                             <div class="form-group">
                               {{ getbook_form.isbn.label_tag }}
@@ -405,6 +403,8 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% load pagination_tags %} 
+                        {% autopaginate book_list 20 %} 
                         {% for book in book_list %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
@@ -418,6 +418,7 @@
                         {% endfor %}
                       </tbody>
                     </table>
+                    {% paginate %}
                   </div>
                 </div>
               </div>

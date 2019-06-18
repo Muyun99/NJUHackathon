@@ -381,6 +381,8 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% load pagination_tags %}
+                        {% autopaginate book_list 20 %}
                         {% for book in book_list %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
@@ -394,6 +396,7 @@
                         {% endfor %}
                       </tbody>
                     </table>
+                    {% paginate %}
                   </div>
                 </div>
               </div>

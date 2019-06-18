@@ -381,6 +381,8 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {% load pagination_tags %} 
+                        {% autopaginate borrowRecord_list 20 %} 
                         {% for borrowRecord in borrowRecord_list %}
                         <tr>
                           <td>{{ forloop.counter }}</td>
@@ -395,6 +397,7 @@
                         {% endfor %}
                       </tbody>
                     </table>
+                    {% paginate %}
                   </div>
                 </div>
               </div>

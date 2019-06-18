@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.db.models import Q
 from datetime import datetime
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from . import models
 from . import forms
 import pymysql
@@ -269,8 +270,11 @@ def ChangeUser(request):
 
 def BookTable(request):
     if (request.method == "GET"):
+        # all_book = models.Book.objects.all()
+        # book_list = Paginator(all_book,10)
         book_list = models.Book.objects.all()
         getbook_form = forms.getBookForm(request.POST)
+        
         return render(request, 'library/BookTable.html', locals())
     if request.method == "POST":
         getbook_form = forms.getBookForm(request.POST)

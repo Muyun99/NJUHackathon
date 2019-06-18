@@ -66,61 +66,76 @@
 
   <body>
     <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
-        <div class="nano">
-            <div class="nano-content">
-                <ul>
-                    <li class="active"><a class="sidebar-sub-toggle"><i class="ti-home"></i> 控制台 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="index.html">Dashboard 1</a></li>
+      <div class="nano">
+        <div class="nano-content">
+          <ul>
+            <li class="active">
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-home"></i> 控制台
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="index.html">Dashboard 1</a></li>
+              </ul>
+            </li>
 
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-user"></i> 用户管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/adduser/">增加新的用户</a></li>
+                <li><a href="/library/deleteuser/">删除用户信息</a></li>
+                <li><a href="/library/changeuser/">修改用户信息</a></li>
+                <li><a href="/library/usertable/">查询用户信息</a></li>
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-user"></i> 用户管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/adduser/">增加新的用户</a></li>
-                            <li><a href="/library/deleteuser/">删除用户信息</a></li>
-                            <li><a href="/library/changeuser/">修改用户信息</a></li>
-                            <li><a href="/library/usertable/">查询用户信息</a></li>
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-layout-grid4-alt"></i> 书籍管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/addbook/">增加新的书籍</a></li>
+                <li><a href="/library/deletebook/">删除书籍信息</a></li>
+                <li><a href="/library/changebook/">修改书籍信息</a></li>
+                <li><a href="/library/booktable/">查询书籍信息</a></li>
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-layout-grid4-alt"></i> 书籍管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/addbook/">增加新的书籍</a></li>
-                            <li><a href="/library/deletebook/">删除书籍信息</a></li>
-                            <li><a href="/library/changebook/">修改书籍信息</a></li>
-                            <li><a href="/library/booktable/">查询书籍信息</a></li>
-                        </ul>
-                    </li>
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-view-list-alt"></i> 借阅记录管理
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
+                <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
+                <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
+                <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
+              </ul>
+            </li>
 
+            <li>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-target"></i> 相关页面
+                <span class="sidebar-collapse-icon ti-angle-down"></span
+              ></a>
+              <ul>
+                <li><a href="/library/login/">登录</a></li>
+                <li><a href="/library/register/">注册</a></li>
+                <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
+              </ul>
+            </li>
 
-                    <li><a class="sidebar-sub-toggle"><i class="ti-view-list-alt"></i> 借阅记录管理 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/addborrowrecord/">增加借阅记录</a></li>
-                            <li><a href="/library/deleteborrowrecord/">删除借阅记录</a></li>
-                            <li><a href="/library/changeborrowrecord/">修改借阅记录</a></li>
-                            <li><a href="/library/borrowrecordtable/">查询借阅记录</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a class="sidebar-sub-toggle"><i class="ti-target"></i> 相关页面 <span
-                                class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="/library/login/">登录</a></li>
-                            <li><a href="/library/register/">注册</a></li>
-                            <!-- <li><a href="page-reset-password.html">忘记密码</a></li> -->
-                        </ul>
-                    </li>
-
-                    <li><a href="/library/logout/"><i class="ti-close"></i> 登出</a></li>
-                </ul>
-            </div>
+            <li>
+              <a href="/library/logout/"><i class="ti-close"></i> 登出</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
     <!-- /# sidebar -->
 
@@ -240,49 +255,37 @@
               <div class="col-lg-12">
                 <div class="card alert">
                   <div class="card-header">
-                    <h4>添加书籍信息</h4>
+                    <h4>删除书籍信息</h4>
                     <div class="booking-system-item">
-                      <form action="/library/addbook/" , method="POST">
+                      <form action="/library/deletebook/" , method="POST">
                         {% if message%}
                         <div class="alert alert-warning">{{ message }}</div>
                         {% endif %} {% csrf_token %}
                         <div class="row">
-                          <div class="col-lg-4">
+                          <div class="col-lg-5">
                             <div class="form-group">
-                              {{ addbook_form.author.label_tag }}
-                              {{ addbook_form.author }}
+                              {{ deletebook_form.book_name.label_tag }}
+                              {{ deletebook_form.book_name }}
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-5">
                             <div class="form-group">
-                              {{ addbook_form.book_name.label_tag }}
-                              {{ addbook_form.book_name }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.isbn.label_tag }}
-                              {{ addbook_form.isbn }}
+                              {{ deletebook_form.author.label_tag }}
+                              {{ deletebook_form.author }}
                             </div>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-lg-4">
+                          <div class="col-lg-5">
                             <div class="form-group">
-                              {{ addbook_form.publisher.label_tag }}
-                              {{ addbook_form.publisher }}
+                              {{ deletebook_form.publisher.label_tag }}
+                              {{ deletebook_form.publisher }}
                             </div>
                           </div>
-                          <div class="col-lg-4">
+                          <div class="col-lg-5">
                             <div class="form-group">
-                              {{ addbook_form.book_count.label_tag }}
-                              {{ addbook_form.book_count }}
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              {{ addbook_form.book_remark.label_tag }}
-                              {{ addbook_form.book_remark }}
+                              {{ deletebook_form.isbn.label_tag }}
+                              {{ deletebook_form.isbn }}
                             </div>
                           </div>
                         </div>
@@ -294,13 +297,12 @@
                                 type="submit"
                                 class="btn btn-primary btn-rounded  m-l-5"
                               >
-                                提交
+                                删除书籍信息
                               </button>
                             </div>
                           </div>
                         </div>
                       </form>
-
                     </div>
                   </div>
                 </div>

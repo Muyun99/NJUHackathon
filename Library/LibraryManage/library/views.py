@@ -320,6 +320,38 @@ def AddBook(request):
 def DeleteBook(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
+        deletebook_form = forms.deleteBookForm(request.POST)
+        return render(request, 'library/deletebook.html', locals())
+    if request.method == "POST":
+        deletebook_form = forms.deleteBookForm(request.POST)
+        message = "请检查填写的内容！"
+        book_list = models.Book.objects.all()
+        if deletebook_form.is_valid():
+            author = deletebook_form.cleaned_data.get('author')
+            book_name = deletebook_form.cleaned_data.get('book_name')
+            isbn = deletebook_form.cleaned_data.get('isbn')
+            publisher = deletebook_form.cleaned_data.get('publisher')
+            if len(author) * len(book_name) * len(isbn) * len(publisher) == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                # conn = pymysql.connect(host='localhost',  # 本地数据库
+                #            user='root',  # 用户名
+                #            passwd='123456',  # 数据库密码
+                #            db='library',  # 数据库名
+                #            charset='utf8')
+                # cursor = conn.cursor()
+                # sql = "DELETE FROM User WHERE id_number=%d,email = %s,name=%s, sex=%s,role=%s" % (id_number,email,username,sex,role)
+                # cursor.execute(sql)
+                # conn.commit()
+                # cursor.close()
+                # conn.close()
+                models.Book.objects.get(
+                    author=author,
+                    book_name=book_name,
+                    isbn=isbn,
+                    publisher=publisher).delete()
+                message = "删除成功！"
+                book_list = models.Book.objects.all()
         return render(request, 'library/deletebook.html', locals())
 
 
@@ -412,6 +444,35 @@ def AddBorrowRecord(request):
 def DeleteBorrowRecord(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
+        deleteborrowRecord_form = forms.deleteBorrowRecordForm(request.POST)
+        return render(request, 'library/deleteborrowrecord.html', locals())
+    if request.method == "POST":
+        deleteborrowRecord_form = forms.deleteBorrowRecordForm(request.POST)
+        message = "请检查填写的内容！"
+        book_list = models.Book.objects.all()
+        if deleteborrowRecord_form.is_valid():
+            id_number = deleteborrowRecord_form.cleaned_data.get('id_number')
+            isbn = deleteborrowRecord_form.cleaned_data.get('isbn')
+            if len(str(id_number)) * len(str(isbn)) == 0:
+                message = "请检查填写的内容！(必须全部填写)"
+            else:
+                # conn = pymysql.connect(host='localhost',  # 本地数据库
+                #            user='root',  # 用户名
+                #            passwd='123456',  # 数据库密码
+                #            db='library',  # 数据库名
+                #            charset='utf8')
+                # cursor = conn.cursor()
+                # sql = "DELETE FROM User WHERE id_number=%d,email = %s,name=%s, sex=%s,role=%s" % (id_number,email,username,sex,role)
+                # cursor.execute(sql)
+                # conn.commit()
+                # cursor.close()
+                # conn.close()
+                models.BorrowRecord.objects.get(
+                    id_number=id_number,
+                    isbn=isbn
+                    ).delete()
+                message = "删除成功！"
+                book_list = models.Book.objects.all()
         return render(request, 'library/deleteborrowrecord.html', locals())
 
 

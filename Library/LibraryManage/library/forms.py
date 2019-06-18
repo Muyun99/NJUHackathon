@@ -251,7 +251,42 @@ class addBookForm(forms.Form):
 
 
 class deleteBookForm(forms.Form):
-    pass
+    author = forms.CharField(
+        label="作者(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "作者",
+            'autofocus': ''
+        }))
+
+    book_name = forms.CharField(
+        label="书名(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "书名",
+        }))
+
+    isbn = forms.CharField(
+        label="ISBN号(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    publisher = forms.CharField(
+        label="出版社(必填)",
+        required=False,
+        max_length=128,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "出版社",
+        }))
 
 
 class updateBookForm(forms.Form):
@@ -332,7 +367,21 @@ class addBorrowRecordForm(forms.Form):
 
 
 class deleteBorrowRecordForm(forms.Form):
-    pass
+    isbn = forms.IntegerField(
+        label="ISBN号(必填)",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "ISBN号",
+        }))
+
+    id_number = forms.IntegerField(
+        label="会员卡号(必填)",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': "会员卡号",
+        }))
 
 
 class updateBorrowRecordForm(forms.Form):

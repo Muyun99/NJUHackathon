@@ -41,6 +41,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
+                    request.session['user_role'] = user.role
                     return redirect('/library/index/')
                 else:
                     message = "密码不正确"
@@ -108,7 +109,11 @@ def UserTable(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
         getuser_form = forms.getUserForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/UserTable.html', locals())
+        
     if request.method == "POST":
         getuser_form = forms.getUserForm(request.POST)
         message = "请检查填写的内容！"
@@ -162,6 +167,9 @@ def AddUser(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
         adduser_form = forms.addUserForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/adduser.html', locals())
     if request.method == "POST":
         adduser_form = forms.addUserForm(request.POST)
@@ -204,6 +212,9 @@ def DeleteUser(request):
     if (request.method == "GET"):
         user_list = models.User.objects.all()
         deleteuser_form = forms.deleteUserForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/deleteuser.html', locals())
     if request.method == "POST":
         deleteuser_form = forms.deleteUserForm(request.POST)
@@ -239,8 +250,12 @@ def DeleteUser(request):
 
 def ChangeUser(request):
     if (request.method == "GET"):
-        user_list = models.User.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            user_list = models.User.objects.all()
+        else:
+            user_list = models.User.objects.filter(id_number=request.session.get('user_id'))
         updateuser_form = forms.updateUserForm(request.POST)
+        
         return render(request, 'library/changeuser.html', locals())
     if (request.method == "POST"):
         user_list = models.User.objects.all()
@@ -251,6 +266,10 @@ def ChangeUser(request):
             email = updateuser_form.cleaned_data.get('email')
             sex = updateuser_form.cleaned_data.get('sex')
             role = updateuser_form.cleaned_data.get('role')
+            
+            if(request.session.get('user_role') != 'admin' and request.session.get('user_id') != id_number):
+                message = "你没有权限修改其他人的信息！"
+                return render(request, 'library/index.html', locals())
             if len(username) * len(email) * len(sex) * role == 0:
                 message = "请检查填写的内容！(必须全部填写)"
             else:
@@ -261,7 +280,10 @@ def ChangeUser(request):
                     role=role
                 )
                 message = "更新用户信息成功！"
-                user_list = models.User.objects.all()
+                if(request.session.get('user_role') == 'admin'):
+                    user_list = models.User.objects.all()
+                else:
+                    user_list = models.User.objects.filter(name=request.session.get('user_name'))
             return render(request, 'library/changeuser.html', locals())
         else:
             message = "请检查填写的内容！"
@@ -279,6 +301,7 @@ def BookTable(request):
     if request.method == "POST":
         getbook_form = forms.getBookForm(request.POST)
         message = "请检查填写的内容！"
+        
         book_list = models.Book.objects.all()
         if getbook_form.is_valid():
             author = getbook_form.cleaned_data.get('author')
@@ -318,6 +341,9 @@ def AddBook(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
         addbook_form = forms.addBookForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/addbook.html', locals())
     # if request.session.get('is_login', None):
     #     return redirect('/library/index/')
@@ -350,6 +376,9 @@ def DeleteBook(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
         deletebook_form = forms.deleteBookForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/deletebook.html', locals())
     if request.method == "POST":
         deletebook_form = forms.deleteBookForm(request.POST)
@@ -388,6 +417,9 @@ def ChangeBook(request):
     if (request.method == "GET"):
         book_list = models.Book.objects.all()
         updatebook_form = forms.updateBookForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/changebook.html', locals())
 
     if (request.method == "POST"):
@@ -422,6 +454,9 @@ def BorrowRecordTable(request):
     if (request.method == "GET"):
         borrowRecord_list = models.BorrowRecord.objects.all()
         getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
+        if(request.session.get('user_role') != 'admin'):
+            message = "你没有权限访问！"
+            return render(request, 'library/index.html', locals())
         return render(request, 'library/BorrowRecordTable.html', locals())
     if request.method == "POST":
         getborrowrecord_form = forms.getBorrowRecordForm(request.POST)
@@ -444,7 +479,7 @@ def BorrowRecordTable(request):
         if id_number == None:
             id_number = 0
         borrowRecord_list = models.BorrowRecord.objects.all().filter(
-            Q(id_number__gte=id_number),
+            Q(id_number=id_number),
             Q(borrow_time__gte=borrow_time),  # 大于等于时间输入的时间
             Q(limit_time__gte=limit_time),
             # Q(book_name__contains=book_name),
@@ -473,11 +508,21 @@ def BorrowRecordTable(request):
 
 def AddBorrowRecord(request):
     if (request.method == "GET"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
         addborrowRecord_form = forms.addBorrowRecordForm()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
+        
         return render(request, 'library/addborrowrecord.html', locals())
     if (request.method == "POST"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
         addborrowRecord_form = forms.addBorrowRecordForm(request.POST)
         if addborrowRecord_form.is_valid():
             id_number = addborrowRecord_form.cleaned_data.get('id_number')
@@ -486,12 +531,27 @@ def AddBorrowRecord(request):
             if limit_time == None:
                 limit_time = 31
 
+
+            sourceBookCount = models.Book.objects.get(isbn=isbn).book_count
+            if(sourceBookCount == 0):
+                message = "你借阅的书籍库存为0"
+                return render(request, 'library/addborrowrecord.html', locals())
+
             new_borrowRecord = models.BorrowRecord()
             new_borrowRecord.id_number = models.User.objects.get(
                 id_number=id_number)
             new_borrowRecord.limit_time = limit_time
             new_borrowRecord.isbn = models.Book.objects.get(isbn=isbn)
             new_borrowRecord.save()
+            if(request.session.get('user_role') != 'admin' and request.session.get('user_id') != id_number):
+                message = "你没有权限为别人借书！"
+                return render(request, 'library/index.html', locals())
+            
+            sourceBookCount -= 1
+            models.Book.objects.filter(isbn=isbn).update(
+                    book_count=sourceBookCount
+                )
+            message = "添加(借阅)成功！"
 
             return render(request, 'library/addborrowrecord.html', locals())
     addborrowRecord_form = forms.addBorrowRecordForm()
@@ -500,16 +560,30 @@ def AddBorrowRecord(request):
 
 def DeleteBorrowRecord(request):
     if (request.method == "GET"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
         deleteborrowRecord_form = forms.deleteBorrowRecordForm(request.POST)
+        # if(request.session.get('user_role') != 'admin'):
+        #     message = "你没有权限访问！"
+        #     return render(request, 'library/index.html', locals())
         return render(request, 'library/deleteborrowrecord.html', locals())
     if request.method == "POST":
         deleteborrowRecord_form = forms.deleteBorrowRecordForm(request.POST)
         message = "请检查填写的内容！"
         book_list = models.Book.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
         if deleteborrowRecord_form.is_valid():
             id_number = deleteborrowRecord_form.cleaned_data.get('id_number')
             isbn = deleteborrowRecord_form.cleaned_data.get('isbn')
+            if(request.session.get('user_role') != 'admin' and request.session.get('user_id') != id_number):
+                message = "你没有权限为别人还书！"
+                return render(request, 'library/index.html', locals())
             if len(str(id_number)) * len(str(isbn)) == 0:
                 message = "请检查填写的内容！(必须全部填写)"
             else:
@@ -528,19 +602,34 @@ def DeleteBorrowRecord(request):
                     id_number=id_number,
                     isbn=isbn
                     ).delete()
-                message = "删除成功！"
-                book_list = models.Book.objects.all()
+                sourceBookCount = models.Book.objects.get(isbn=isbn).book_count
+                sourceBookCount -= 1
+                models.Book.objects.filter(isbn=isbn).update(
+                    book_count=sourceBookCount
+                )
+                message = "删除(还书)成功！"
+
+                
+                borrowRecord_list = models.Book.objects.all()
         return render(request, 'library/deleteborrowrecord.html', locals())
 
 
 def ChangeBorrowRecord(request):
     if (request.method == "GET"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
         updateborrowRecord_form = forms.updateBorrowRecordForm(request.POST)
         return render(request, 'library/changeborrowrecord.html', locals())
 
     if (request.method == "POST"):
-        borrowRecord_list = models.BorrowRecord.objects.all()
+        # borrowRecord_list = models.BorrowRecord.objects.all()
+        if(request.session.get('user_role') == 'admin'):
+            borrowRecord_list = models.BorrowRecord.objects.all()
+        else:
+            borrowRecord_list = models.BorrowRecord.objects.filter(id_number_id=request.session.get('user_id'))
         updateborrowRecord_form = forms.updateBorrowRecordForm(request.POST)
         if updateborrowRecord_form.is_valid():
             isbn = updateborrowRecord_form.cleaned_data.get('isbn')

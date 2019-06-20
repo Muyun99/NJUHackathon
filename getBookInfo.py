@@ -6,7 +6,7 @@ import random
 
 
 def getBookInfo():
-    index = 931148
+    index = 200000
     conn = pymysql.connect(host='localhost',  # 本地数据库
                            user='root',  # 用户名
                            passwd='123456',  # 数据库密码
@@ -33,7 +33,7 @@ def getBookInfo():
             url = "http://www.cnpub.com.cn/2019/"
             index += 1
             url = url + str(index) + ".html"
-            print(url)
+            # print(url)
             code = requests.get(url)
             soup = BeautifulSoup(code.text, "html.parser")
             title = soup.title
@@ -137,13 +137,13 @@ def getBookInfo():
                     bookname, publisher, ISBN, Author, int(random.random() * 10) + 1, bookname + "是一本不错的书")
                 cursor.execute(sql)
                 conn.commit()
-                print("写入成功!!!!!!")
+                # print("写入成功!!!!!!")
             else:
                 print("有属性值为空!!!!!!!")
         except Exception as e:
             # 如果执行sql语句出现问题，则执行回滚操作
             conn.rollback()
-            print("插入异常!!!!!!")
+            # print("插入异常!!!!!!")
             print(e)
 
     conn.commit()
